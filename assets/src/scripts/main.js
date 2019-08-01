@@ -3,9 +3,15 @@ window.$ = jQuery;
 window.jQuery = jQuery;
 
 var camera, scene, renderer;
+var controls;
 var aspect = window.innerWidth / window.innerHeight;
 var d = 1.5;
 const gui = new dat.GUI();
+
+var isControlEnable = false;
+
+// var model;
+// var skeleton;
 
 var keyboard = {};
 
@@ -67,8 +73,8 @@ var models = {
         mesh: null
     },
     char: {
-        obj: "assets/dist/object/char/char.obj",
-        mtl: "assets/dist/object/char/char.mtl",
+        obj: "assets/dist/object/char/char_no_rigging.obj",
+        mtl: "assets/dist/object/char/char_no_rigging.mtl",
         // path: "building/",
         name: "char",
         postionX: 0,
@@ -99,7 +105,7 @@ function renderInit() {
 
     // camera = new THREE.OrthographicCamera(- d * aspect, d * aspect, d, - d, 1, 1000);
 
-    camera.position.set(20, 20, 20); // all components equal
+    camera.position.set(20.8, 20, 20 - 0.8); // all components equal
     camera.lookAt(scene.position); // or the origin
 
     window.addEventListener('resize', onWindowResize, false);
@@ -130,7 +136,8 @@ function renderInit() {
     renderer.setClearColor(0xc7e1ff);
     document.body.appendChild(renderer.domElement);
 
-
+        renderer.gammaOutput = true;
+        renderer.gammaFactor = 2.2;
 
     renderer.shadowMapEnabled = true;
     renderer.shadowMapSoft = true;
@@ -146,8 +153,8 @@ function renderInit() {
 
     //#endregion
 
-    var axesHelper = new THREE.AxesHelper( 2 );
-    scene.add( axesHelper );
+    var axesHelper = new THREE.AxesHelper(2);
+    scene.add(axesHelper);
 
     //#region spotLight
     var spotLight = new THREE.SpotLight(0xffffff);
@@ -218,6 +225,8 @@ function renderInit() {
     }
     //#endregion
 
+    // loadCharSkeleton();
+
     //#region Light UI
 
     var light = gui.addFolder('spotLight');
@@ -230,6 +239,25 @@ function renderInit() {
     cameraGui.add(camera.position, 'x', 0, 50);
     cameraGui.add(camera.position, 'y', 0, 50);
     cameraGui.add(camera.position, 'z', 0, 50);
+
+
+    var settings = {
+        'enable Controls': false
+    };
+    var folder1 = gui.addFolder('enableControls');
+    folder1.add(settings, 'enable Controls').onChange(setEnableControls);
+
+    function setEnableControls(enableControls) {
+        // enableControls = enableControls;
+        isControlEnable = enableControls;
+        if(isControlEnable == true){
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.update();
+        }
+    }
+    // function showSkeleton(visibility) {
+    //     skeleton.visible = visibility;
+    // }
     // cameraGui.open();
 
     // var charGui = gui.addFolder('Char');
@@ -253,6 +281,8 @@ function renderInit() {
 
     //# endregion
 
+    var prevTime = Date.now();
+
     var animate = function () {
 
         if (RESOURCES_LOADED == false) {
@@ -266,9 +296,14 @@ function renderInit() {
         charMovement(delta);
 
         renderer.render(scene, camera);
+
+        if(isControlEnable == true){
+            controls.update();
+        }
         // controls.update();
+
         camera.lookAt(objectByName.position);
-        // console.log(camera.position);
+
         requestAnimationFrame(function () {
             animate(renderer, scene, camera);
         });
@@ -307,7 +342,8 @@ function onResourcesLoad() {
     meshes["street10"].position.set(18, 0.1, 0);
 
     meshes["home"].position.set(0, 0.1, -2);
-    meshes["char"].position.set(0, 0.1, 0);
+    meshes["char"].position.set(0.8, 0.2, -0.8);
+    // meshes["char"].scale.set(0.05, 0.05, 0.05);
 
     scene.add(meshes["friTree01"]);
     scene.add(meshes["friTree02"]);
@@ -325,26 +361,30 @@ function onResourcesLoad() {
     scene.add(meshes["char"]);
 
     objectByName = meshes["char"];
-    
-    collidableMeshList.push(meshes["home"]);
+    console.log(objectByName);
+    // console.log(objectByName.skeleton.bones);
+    // collidableMeshList.push(meshes["home"]);
 }
 
-// meshes["char"].position.x;
-// meshes["char"].position.y;
-// meshes["char"].position.z;
-// camera.position.x += meshes["char"].position.x;
-// camera.position.y += meshes["char"].position.y;
-// camera.position.z += meshes["char"].position.z;
-// console.log(camera.position.x);
-// camera.updateProjectionMatrix()
-
-// objectByName.translateX(playerVelocity.x * delta);
-// objectByName.translateZ(playerVelocity.z * delta);
-
-// // #region Camera
-// camera.position.x += playerVelocity.x * delta;
-// camera.position.z += playerVelocity.z * delta;
-// camera.updateProjectionMatrix();
+// function loadCharSkeleton() {
+//     var loader = new THREE.GLTFLoader();
+//     loader.load('/assets/dist/object/test/scene.gltf', function (gltf) {
+//         model = gltf.scene;
+//         model.position.y = 0.1;
+//         model.scale.set(0.25, 0.25, 0.25);
+//         model.rotation.y = Math.PI/2;
+//         scene.add(model);
+//         objectByName = model;
+//         model.traverse(function (object) {
+//             if (object.isMesh) object.castShadow = true;
+//         });
+//         //
+//         skeleton = new THREE.SkeletonHelper(model);
+//         skeleton.visible = false;
+//         scene.add(skeleton);
+//         console.log(model);
+//     });
+// }
 
 function onWindowResize() {
 
@@ -365,7 +405,7 @@ function charMovement(delta) {
     playerVelocity.z -= playerVelocity.z * 10.0 * delta;
     playerVelocity.y -= playerVelocity.y * 10.0 * delta;
 
-    if (keyboard[87] || keyboard[38] || keyboard[83] || keyboard[40]|| keyboard[37] || keyboard[39]) {
+    if (keyboard[87] || keyboard[38] || keyboard[83] || keyboard[40] || keyboard[37] || keyboard[39]) {
         if (keyboard[87] || keyboard[38]) {
             playerVelocity.x += PLAYERSPEED * delta;
             // console.log(objectByName.position);

@@ -5,7 +5,7 @@ window.jQuery = jQuery;
 var camera, scene, renderer;
 var controls;
 var aspect = window.innerWidth / window.innerHeight;
-var d = 1.5;
+var d = 2.5;
 const gui = new dat.GUI();
 
 var isControlEnable = false;
@@ -52,6 +52,16 @@ var models = {
         postionZ: 2,
         mesh: null
     },
+    LowTree: {
+        obj: "assets/dist/object/tree/low-poly-tree/low_tree.obj",
+        mtl: "assets/dist/object/tree/low-poly-tree/low_tree.mtl",
+        // path: "tree/fri/",
+        name: "low_tree",
+        postionX: 0,
+        postionY: 0,
+        postionZ: 2,
+        mesh: null
+    },
     street: {
         obj: "assets/dist/object/street/street.obj",
         mtl: "assets/dist/object/street/street.mtl",
@@ -77,6 +87,16 @@ var models = {
         mtl: "assets/dist/object/char/char_no_rigging.mtl",
         // path: "building/",
         name: "char",
+        postionX: 0,
+        postionY: 0.1,
+        postionZ: -2,
+        mesh: null
+    },
+    gras: {
+        obj: "assets/dist/object/enviroment/gras.obj",
+        mtl: "assets/dist/object/enviroment/gras.mtl",
+        // path: "building/",
+        name: "gras",
         postionX: 0,
         postionY: 0.1,
         postionZ: -2,
@@ -136,8 +156,8 @@ function renderInit() {
     renderer.setClearColor(0xc7e1ff);
     document.body.appendChild(renderer.domElement);
 
-        renderer.gammaOutput = true;
-        renderer.gammaFactor = 2.2;
+    renderer.gammaOutput = true;
+    renderer.gammaFactor = 2.0;
 
     renderer.shadowMapEnabled = true;
     renderer.shadowMapSoft = true;
@@ -147,20 +167,20 @@ function renderInit() {
     var hemiLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
     scene.add(hemiLight);
 
-    var helper = new THREE.HemisphereLightHelper(hemiLight, 5);
+    // var helper = new THREE.HemisphereLightHelper(hemiLight, 5);
 
-    scene.add(helper);
+    // scene.add(helper);
 
     //#endregion
 
-    var axesHelper = new THREE.AxesHelper(2);
-    scene.add(axesHelper);
+    // var axesHelper = new THREE.AxesHelper(2);
+    // scene.add(axesHelper);
 
     //#region spotLight
     var spotLight = new THREE.SpotLight(0xffffff);
     spotLight.position.set(3, 14, 12);
     spotLight.castShadow = true;
-    // spotLight.shadow.radius = 8;
+    // spotLight.shadow.radius = 4;
 
     spotLight.shadowMapWidth = 2048;
     spotLight.shadowMapHeight = 2048;
@@ -170,8 +190,8 @@ function renderInit() {
     scene.add(spotLight);
 
     //Create a helper for the shadow camera (optional)
-    var helper = new THREE.CameraHelper(spotLight.shadow.camera);
-    scene.add(helper);
+    // var helper = new THREE.CameraHelper(spotLight.shadow.camera);
+    // scene.add(helper);
     //#enregion
 
     //#region Plane Ground
@@ -314,6 +334,10 @@ function renderInit() {
 function onResourcesLoad() {
     meshes["friTree01"] = models.friTree.mesh.clone();
     meshes["friTree02"] = models.friTree.mesh.clone();
+    meshes["friTree03"] = models.friTree.mesh.clone();
+    meshes["friTree04"] = models.friTree.mesh.clone();
+    meshes["lowTree01"] = models.LowTree.mesh.clone();
+    meshes["lowTree02"] = models.LowTree.mesh.clone();
     meshes["street01"] = models.street.mesh.clone();
     meshes["street02"] = models.street.mesh.clone();
     meshes["street03"] = models.street.mesh.clone();
@@ -326,27 +350,56 @@ function onResourcesLoad() {
     meshes["street10"] = models.street.mesh.clone();
     meshes["home"] = models.home.mesh.clone();
     meshes["char"] = models.char.mesh.clone();
+    meshes["gras01"] = models.gras.mesh.clone();
+    meshes["gras02"] = models.gras.mesh.clone();
+    meshes["gras03"] = models.gras.mesh.clone();
+    meshes["gras04"] = models.gras.mesh.clone();
+    meshes["gras05"] = models.gras.mesh.clone();
+    meshes["gras06"] = models.gras.mesh.clone();
 
-    meshes["friTree01"].position.set(models.friTree.postionX, models.friTree.postionY, models.friTree.postionZ);
-    meshes["friTree02"].position.set(-1, 0, 1);
+    meshes["friTree01"].position.set(0.5, 0, 2);
+    meshes["friTree02"].position.set(-0.5, 0, 1.5);
+    meshes["friTree03"].position.set(3, 0, 1.5);
+    meshes["friTree04"].position.set(4, 0, 2.5);
 
-    meshes["street01"].position.set(0, 0.1, 0);
-    meshes["street02"].position.set(2, 0.1, 0);
-    meshes["street03"].position.set(4, 0.1, 0);
-    meshes["street04"].position.set(6, 0.1, 0);
-    meshes["street05"].position.set(8, 0.1, 0);
-    meshes["street06"].position.set(10, 0.1, 0);
-    meshes["street07"].position.set(12, 0.1, 0);
-    meshes["street08"].position.set(14, 0.1, 0);
-    meshes["street09"].position.set(16, 0.1, 0);
-    meshes["street10"].position.set(18, 0.1, 0);
+    meshes["lowTree01"].position.set(2, 0 ,2.5);
+    meshes["lowTree02"].position.set(5, 0 ,1.5);
+    meshes["lowTree01"].rotation.y = -Math.PI/2;
+    meshes["lowTree01"].scale.set(0.5, 0.5 ,0.5);
+    meshes["lowTree02"].scale.set(0.5, 0.5 ,0.5);
 
-    meshes["home"].position.set(0, 0.1, -2);
-    meshes["char"].position.set(0.8, 0.2, -0.8);
+    meshes["street01"].position.set(-4, 0.1, 0);
+    meshes["street02"].position.set(-2, 0.1, 0);
+    meshes["street03"].position.set(0, 0.1, 0);
+    meshes["street04"].position.set(2, 0.1, 0);
+    meshes["street05"].position.set(4, 0.1, 0);
+    meshes["street06"].position.set(6, 0.1, 0);
+    meshes["street07"].position.set(8, 0.1, 0);
+    meshes["street08"].position.set(10, 0.1, 0);
+    meshes["street09"].position.set(12, 0.1, 0);
+    meshes["street10"].position.set(14, 0.1, 0);
+    
+    meshes["gras01"].position.set(-4, 0.1 , 2);
+    meshes["gras02"].position.set(-2, 0.1 , 2);
+    meshes["gras03"].position.set(0, 0.1 , 2);
+    meshes["gras04"].position.set(2, 0.1 , 2);
+    meshes["gras05"].position.set(4, 0.1 , 2);
+    meshes["gras06"].position.set(6, 0.1 , 2);
+    
+    meshes["home"].position.set(1, 0.05, -3);
+    meshes["home"].scale.set(2, 2, 2);
+   
+    meshes["char"].position.set(0.8, 0.17, -0.8);
+    meshes["char"].rotation.y = -Math.PI / 2;
+    // meshes["char"].rotation.y = -45 * Math.PI / 180;
     // meshes["char"].scale.set(0.05, 0.05, 0.05);
 
     scene.add(meshes["friTree01"]);
     scene.add(meshes["friTree02"]);
+    scene.add(meshes["friTree03"]);
+    scene.add(meshes["friTree04"]);
+    scene.add(meshes["lowTree01"]);
+    scene.add(meshes["lowTree02"]);
     scene.add(meshes["street01"]);
     scene.add(meshes["street02"]);
     scene.add(meshes["street03"]);
@@ -359,11 +412,22 @@ function onResourcesLoad() {
     scene.add(meshes["street10"]);
     scene.add(meshes["home"]);
     scene.add(meshes["char"]);
-
+    scene.add(meshes["gras01"]);
+    scene.add(meshes["gras02"]);
+    scene.add(meshes["gras03"]);
+    scene.add(meshes["gras04"]);
+    scene.add(meshes["gras05"]);
+    scene.add(meshes["gras06"]);
+    
     objectByName = meshes["char"];
     console.log(objectByName);
+
+    setTimeout(showIntro, 3000);
     // console.log(objectByName.skeleton.bones);
     // collidableMeshList.push(meshes["home"]);
+}
+function showIntro(){
+    // alert("Hello");
 }
 
 // function loadCharSkeleton() {

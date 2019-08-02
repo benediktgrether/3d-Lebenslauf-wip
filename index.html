@@ -17,11 +17,17 @@
 	<!-- <script type="text/javascript" src="/assets/dist/js/getObject.js"></script> -->
 	<script type="text/javascript" src="/assets/dist/js/components/dat.gui.min.js"></script>
 	<script>
-		(function() { var script = document.createElement('script'); script.onload = function () { var stats = new Stats(); document.body.appendChild(stats.dom); requestAnimationFrame(function loop() { stats.update(); requestAnimationFrame(loop) }); }; script.src = '//mrdoob.github.io/stats.js/build/stats.min.js'; document.head.appendChild(script); }) ()
+		(function () { var script = document.createElement('script'); script.onload = function () { var stats = new Stats(); document.body.appendChild(stats.dom); requestAnimationFrame(function loop() { stats.update(); requestAnimationFrame(loop) }); }; script.src = '//mrdoob.github.io/stats.js/build/stats.min.js'; document.head.appendChild(script); })()
 	</script>
 	<style>
-		body { margin: 0; }
-		canvas { width: 100%; height: 100% }
+		body {
+			margin: 0;
+		}
+
+		canvas {
+			width: 100%;
+			height: 100%
+		}
 	</style>
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -29,6 +35,15 @@
 </head>
 
 <body>
+	<div class="intro-wrapper">
+		<div class="intro-card">
+			<div class="intro-text">
+				Hallo, wie schön das du auf meiner Webseite und Lebenslauf gelandet bist.<br><q>>>Houston, Tranquility Base here. The Eagle has landed<<</q> <br>
+				Jetzt zu mir. Ich heiße Benedikt Grether und bin zurzeit 29 Jahre alt.
+			</div>
+			<div class="intro-filter"></div>
+		</div>
+	</div>
 	<script type="text/javascript" src="assets/dist/js/main.js"></script>
 </body>
 

@@ -1,6 +1,9 @@
-import jQuery from "jquery"
+import jQuery from "jquery";
 window.$ = jQuery;
 window.jQuery = jQuery;
+
+import showText from "./showText";
+import clickCardArrow from "./clickCardArrow";
 
 var camera, scene, renderer;
 var controls;
@@ -113,7 +116,24 @@ var collidableMeshList = [];
 
 $(document).ready(function () {
 
+    var getHeight = $('.card-wrapper').height();
+    var getWidth = $('.card-wrapper').width();
+    $('.card-boxshadow').css({
+        height: getHeight,
+        width: getWidth
+    });
+    console.log(getWidth);
+
     console.info('DOM Ready');
+    // console.log(multiplyByTwo(2));
+    $(function () { 
+ 
+        showText(".card-text", "Hallo wie schön das du auf meiner Webseite und Lebenslauf gelandet bist.", 0, 100);    
+    }); 
+    
+    $('.card-arrow').on('click', function(){
+        clickCardArrow();
+    })
     renderInit();
 });
 

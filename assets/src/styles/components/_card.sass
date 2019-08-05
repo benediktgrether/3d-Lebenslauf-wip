@@ -1,4 +1,4 @@
-.intro-wrapper
+.card-wrapper
     width: 100%
     position: fixed
     top: 50%
@@ -6,27 +6,35 @@
     transform: translate(-50%)
     clip: rect(0px, auto, auto, 0px)
     transform: translate(-50%, -50%) rotateX(20deg) rotateY(59.33333337deg) rotateZ(0deg)
+    z-index: 1
     +break($break-l)
         width: auto
 
+.card-boxshadow
+    position: fixed
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%) rotateX(20deg) rotateY(59.33333337deg) rotateZ(0deg)
+    background: linear-gradient(to right, #36D1DCCC, #5B86E5CC);
+    filter: blur(5px)
+    z-index: 0
 
-.intro-card
+.card
     position: relative
-    width: 100%
-    height: 100%
-    // border: 1px solid rgb(255, 255, 255)
-    // #DA1A60 red
-    // #FF8901 orange
+    +break($break-m)
+        width: 600px
+        height: 300px
 
 
-.intro-text
-    padding: 25px;
-    font-size: 3rem;
+.card-text
+    padding: 25px
+    font-size: 3rem
     color: white
     text-shadow: 1px -1px black,  2px -2px black, 3px -3px black,  4px -4px black, 5px -5px black
     // text-shadow: 1px -1px black,  2px -2px black, 3px -3px black,  4px -4px black, 5px -5px black, 6px -6px black
 
-.intro-filter
+
+.card-filter
     position: absolute
     top: -10px
     left: -10px
@@ -36,3 +44,28 @@
     background: linear-gradient(to right, #36D1DCCC, #5B86E5CC);
     filter: blur(10px)
     z-index: -1  
+
+.card-arrow
+    display: none
+    position: absolute
+    right: 40px
+    bottom: 10px
+    font-size: 2rem
+    color: white
+    text-shadow: 1px -1px black,  2px -2px black, 3px -3px black,  4px -4px black, 5px -5px black
+
+.card-arrow--bounce  
+  animation: card-arrow--bounce 2s infinite;
+ 
+
+@keyframes card-arrow--bounce  
+  0%, 20%, 50%, 80%, 100%  
+    transform: translateY(0);
+   
+  40%  
+    transform: translateY(-15px);
+   
+  60%  
+    transform: translateY(-5px);
+   
+ 

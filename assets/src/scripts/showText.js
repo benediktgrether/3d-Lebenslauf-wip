@@ -61,9 +61,3 @@ $('.card-close').on('click',function(){
 })
 
 export default showText;
-
-
-// const multiplyByTwo = (numberToMultipy) => {
-//     return numberToMultipy*2;
-// }
-// export default multiplyByTwo;

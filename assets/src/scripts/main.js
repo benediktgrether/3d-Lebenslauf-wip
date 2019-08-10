@@ -2,7 +2,7 @@ import jQuery from "jquery";
 window.$ = jQuery;
 window.jQuery = jQuery;
 
-import showText from "./showText";
+import{clickUiInformation} from "./clickCard";
 import renderInit from "./renderInit";
 
 
@@ -20,9 +20,13 @@ $(document).ready(function () {
     console.log(getWidth);
 
     console.info('DOM Ready');
-    $(function () { 
+    // $(function () { 
  
-        showText(".card-text", 1, 0, 0, 100);    
-    }); 
+    //     showText(".card-text", 1, 0, 0, 100);    
+    // }); 
     renderInit();
+
+
 });
+
+clickUiInformation();

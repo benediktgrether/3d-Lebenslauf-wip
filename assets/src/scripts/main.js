@@ -3,7 +3,7 @@ window.$ = jQuery;
 window.jQuery = jQuery;
 
 import showText from "./showText";
-import clickCardArrow from "./clickCardArrow";
+
 
 var camera, scene, renderer;
 var controls;
@@ -128,12 +128,13 @@ $(document).ready(function () {
     // console.log(multiplyByTwo(2));
     $(function () { 
  
-        showText(".card-text", "Hallo wie schön das du auf meiner Webseite und Lebenslauf gelandet bist.", 0, 100);    
+        showText(".card-text", 1, 0, 0, 100);    
     }); 
     
-    $('.card-arrow').on('click', function(){
-        clickCardArrow();
-    })
+
+    // $('.card-arrow').on('click', function(){
+    //     clickCardArrow();
+    // })
     renderInit();
 });
 

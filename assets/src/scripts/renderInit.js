@@ -311,7 +311,6 @@ function renderInit() {
         // controls.update();
 
         camera.lookAt(objectByName.position);
-
         requestAnimationFrame(function () {
             animate(renderer, scene, camera);
         });
@@ -410,12 +409,12 @@ function onResourcesLoad() {
     objectByName = meshes["char"];
     console.log(objectByName);
 
-    setTimeout(showIntro, 3000);
+    setTimeout(showInformation, 3000);
     // console.log(objectByName.skeleton.bones);
     // collidableMeshList.push(meshes["home"]);
 }
-function showIntro(){
-    // alert("Hello");
+function showInformation(){
+    $('.ui-information-wrapper').css({'display': 'flex'})
 }
 
 // function loadCharSkeleton() {

@@ -20,6 +20,7 @@ const clickCardArrow = (getI, getJ) =>{
 const clickCardClose = () =>{
     $('.card-text').empty();
     $('.card-close').hide(); 
+    $('.card-wrapper, .card').hide();
 }
 
 const clickUiInformation = () => {
@@ -27,9 +28,9 @@ const clickUiInformation = () => {
         console.log("Bist du hier drin?");
         $('.ui-information-wrapper').removeClass('ui-information--bounce');
         $('.ui-information-wrapper').hide();
-        setTimeout(function () { $('.card-wrapper').show() }, 500);
-        setTimeout(function () { $('.card').show() }, 500);
-        setTimeout(function () {showText(".card-text", 1, 0, 0, 100)}, 5000);    
+        setTimeout(function () { $('.card-wrapper, .card').show() }, 200);
+        // setTimeout(function () { $('.card').show() }, 200);
+        setTimeout(function () {showText(".card-text", 1, 0, 0, 100)}, 700);    
     })
 }
 

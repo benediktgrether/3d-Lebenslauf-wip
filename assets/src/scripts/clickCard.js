@@ -29,7 +29,6 @@ const clickUiInformation = () => {
         $('.ui-information-wrapper').removeClass('ui-information--bounce');
         $('.ui-information-wrapper').hide();
         setTimeout(function () { $('.card-wrapper, .card').show() }, 200);
-        // setTimeout(function () { $('.card').show() }, 200);
         setTimeout(function () {showText(".card-text", 1, 0, 0, 100)}, 700);    
     })
 }

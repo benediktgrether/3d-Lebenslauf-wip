@@ -8,6 +8,9 @@ var isControlEnable = false;
 
 // var model;
 // var skeleton;
+var smoke = [];
+var renderSmoke = true;
+
 
 var keyboard = {};
 
@@ -96,6 +99,12 @@ var models = {
         postionX: 0,
         postionY: 0.1,
         postionZ: -2,
+        mesh: null
+    },
+    smoke: {
+        obj: "assets/dist/object/smoke/smoke.obj",
+        mtl: "assets/dist/object/smoke/smoke.mtl",
+        name: "smoke",
         mesh: null
     }
 };
@@ -233,7 +242,7 @@ function renderInit() {
     }
     //#endregion
 
-    // loadCharSkeleton();
+    // loadSmoke();
 
     //#region Light UI
 
@@ -258,7 +267,7 @@ function renderInit() {
     function setEnableControls(enableControls) {
         // enableControls = enableControls;
         isControlEnable = enableControls;
-        if(isControlEnable == true){
+        if (isControlEnable == true) {
             controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.update();
         }
@@ -305,11 +314,13 @@ function renderInit() {
 
         renderer.render(scene, camera);
 
-        if(isControlEnable == true){
+        if (isControlEnable == true) {
             controls.update();
         }
         // controls.update();
-
+        if(renderSmoke == true){
+            startingSmokeAnimation();
+        }
         camera.lookAt(objectByName.position);
         requestAnimationFrame(function () {
             animate(renderer, scene, camera);
@@ -344,16 +355,22 @@ function onResourcesLoad() {
     meshes["gras05"] = models.gras.mesh.clone();
     meshes["gras06"] = models.gras.mesh.clone();
 
+    meshes["smoke00"] = models.smoke.mesh.clone();
+    meshes["smoke01"] = models.smoke.mesh.clone();
+    meshes["smoke02"] = models.smoke.mesh.clone();
+    meshes["smoke03"] = models.smoke.mesh.clone();
+    meshes["smoke04"] = models.smoke.mesh.clone();
+
     meshes["friTree01"].position.set(0.5, 0, 2);
     meshes["friTree02"].position.set(-0.5, 0, 1.5);
     meshes["friTree03"].position.set(3, 0, 1.5);
     meshes["friTree04"].position.set(4, 0, 2.5);
 
-    meshes["lowTree01"].position.set(2, 0 ,2.5);
-    meshes["lowTree02"].position.set(5, 0 ,1.5);
-    meshes["lowTree01"].rotation.y = -Math.PI/2;
-    meshes["lowTree01"].scale.set(0.5, 0.5 ,0.5);
-    meshes["lowTree02"].scale.set(0.5, 0.5 ,0.5);
+    meshes["lowTree01"].position.set(2, 0, 2.5);
+    meshes["lowTree02"].position.set(5, 0, 1.5);
+    meshes["lowTree01"].rotation.y = -Math.PI / 2;
+    meshes["lowTree01"].scale.set(0.5, 0.5, 0.5);
+    meshes["lowTree02"].scale.set(0.5, 0.5, 0.5);
 
     meshes["street01"].position.set(-4, 0.1, 0);
     meshes["street02"].position.set(-2, 0.1, 0);
@@ -365,19 +382,36 @@ function onResourcesLoad() {
     meshes["street08"].position.set(10, 0.1, 0);
     meshes["street09"].position.set(12, 0.1, 0);
     meshes["street10"].position.set(14, 0.1, 0);
-    
-    meshes["gras01"].position.set(-4, 0.1 , 2);
-    meshes["gras02"].position.set(-2, 0.1 , 2);
-    meshes["gras03"].position.set(0, 0.1 , 2);
-    meshes["gras04"].position.set(2, 0.1 , 2);
-    meshes["gras05"].position.set(4, 0.1 , 2);
-    meshes["gras06"].position.set(6, 0.1 , 2);
-    
+
+    meshes["gras01"].position.set(-4, 0.1, 2);
+    meshes["gras02"].position.set(-2, 0.1, 2);
+    meshes["gras03"].position.set(0, 0.1, 2);
+    meshes["gras04"].position.set(2, 0.1, 2);
+    meshes["gras05"].position.set(4, 0.1, 2);
+    meshes["gras06"].position.set(6, 0.1, 2);
+
     meshes["home"].position.set(1, 0.05, -3);
     meshes["home"].scale.set(2, 2, 2);
-   
+
     meshes["char"].position.set(0.8, 0.17, -0.8);
     meshes["char"].rotation.y = -Math.PI / 2;
+
+    // meshes["smoke00"].position.set(0.8, 0.5, -0.8);
+    meshes["smoke00"].position.set(0.8, -2.5 + 1.5, -0.8);
+    meshes["smoke00"].scale.set(0.5, 0.5, 0.5);
+
+    meshes["smoke01"].position.set(0.8, -2.5 + 1.7, -1);
+    meshes["smoke01"].scale.set(0.45, 0.45, 0.45);
+
+    meshes["smoke02"].position.set(0.8, -2.5 + 1.8, -0.5);
+    meshes["smoke02"].scale.set(0.3, 0.3, 0.3);
+
+    meshes["smoke03"].position.set(0.8, -2.5 + 2, -0.8);
+    meshes["smoke03"].scale.set(0.25, 0.25, 0.25);
+
+    meshes["smoke04"].position.set(0.7, -2.5 + 2.2, -0.9);
+    meshes["smoke04"].scale.set(0.2, 0.2, 0.2);
+
     // meshes["char"].rotation.y = -45 * Math.PI / 180;
     // meshes["char"].scale.set(0.05, 0.05, 0.05);
 
@@ -405,34 +439,47 @@ function onResourcesLoad() {
     scene.add(meshes["gras04"]);
     scene.add(meshes["gras05"]);
     scene.add(meshes["gras06"]);
-    
-    objectByName = meshes["char"];
-    console.log(objectByName);
 
-    setTimeout(showInformation, 3000);
+    scene.add(meshes["smoke00"]);
+    scene.add(meshes["smoke01"]);
+    scene.add(meshes["smoke02"]);
+    scene.add(meshes["smoke03"]);
+    scene.add(meshes["smoke04"]);
+
+    for (let index = 0; index < 5; index++) {
+        smoke[index] = meshes["smoke0" + [index]];
+
+    }
+    console.log(smoke);
+
+    objectByName = meshes["char"];
+    objectByName.visible = false;
+    console.log(objectByName.visible);
+
+
     // console.log(objectByName.skeleton.bones);
     // collidableMeshList.push(meshes["home"]);
 }
-function showInformation(){
-    $('.ui-information-wrapper').css({'display': 'flex'})
+function showInformation() {
+    $('.ui-information-wrapper').css({ 'display': 'flex' })
 }
 
-// function loadCharSkeleton() {
+// function loadSmoke() {
 //     var loader = new THREE.GLTFLoader();
-//     loader.load('/assets/dist/object/test/scene.gltf', function (gltf) {
-//         model = gltf.scene;
+//     loader.load('/assets/dist/object/smoke/smoke02.gltf', function (gltf) {
+//         var model = gltf.scene;
 //         model.position.y = 0.1;
-//         model.scale.set(0.25, 0.25, 0.25);
-//         model.rotation.y = Math.PI/2;
+//         // model.scale.set(0.25, 0.25, 0.25);
+//         // model.rotation.y = Math.PI/2;
 //         scene.add(model);
 //         objectByName = model;
 //         model.traverse(function (object) {
 //             if (object.isMesh) object.castShadow = true;
 //         });
+//         // mixer = new THREE.AnimationMixer(model);
+//         // mixer.clipAction(gltf.animations[0]).play();
+//         // console.log(mixer.clipAction(gltf.animations[0]));
 //         //
-//         skeleton = new THREE.SkeletonHelper(model);
-//         skeleton.visible = false;
-//         scene.add(skeleton);
 //         console.log(model);
 //     });
 // }
@@ -499,3 +546,47 @@ window.addEventListener('keyup', keyUp);
 
 
 export default renderInit;
+
+var charVisibility = false;
+
+function startingSmokeAnimation() {
+    if (renderSmoke == true) {
+        if (smoke[0].scale.x > 0) {
+            if (smoke[0].position.y > 0.4 && charVisibility == false) {
+                objectByName.visible = true;
+                charVisibility = true;
+            }
+            smoke[0].position.y += Math.sin(1) * 0.015;
+            smoke[0].scale.x -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+            smoke[0].scale.y -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+            smoke[0].scale.z -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+        }else{
+            showInformation();
+            renderSmoke = false;
+        }
+        if (smoke[1].scale.x > 0) {
+            smoke[1].position.y += Math.sin(1) * 0.016;
+            smoke[1].scale.x -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+            smoke[1].scale.y -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+            smoke[1].scale.z -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+        }
+        if (smoke[2].scale.x > 0) {
+            smoke[2].position.y += Math.sin(1) * 0.017;
+            smoke[2].scale.x -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+            smoke[2].scale.y -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+            smoke[2].scale.z -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+        }
+        if (smoke[3].scale.x > 0) {
+            smoke[3].position.y += Math.sin(1) * 0.018;
+            smoke[3].scale.x -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+            smoke[3].scale.y -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+            smoke[3].scale.z -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+        }
+        if (smoke[4].scale.x > 0) {
+            smoke[4].position.y += Math.sin(1) * 0.019;
+            smoke[4].scale.x -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+            smoke[4].scale.y -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+            smoke[4].scale.z -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
+        }
+    }
+}

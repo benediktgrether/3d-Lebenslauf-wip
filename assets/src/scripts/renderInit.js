@@ -6,8 +6,6 @@ const gui = new dat.GUI();
 
 var isControlEnable = false;
 
-// var model;
-// var skeleton;
 var smoke = [];
 var renderSmoke = true;
 
@@ -450,11 +448,9 @@ function onResourcesLoad() {
         smoke[index] = meshes["smoke0" + [index]];
 
     }
-    console.log(smoke);
 
     objectByName = meshes["char"];
     objectByName.visible = false;
-    console.log(objectByName.visible);
 
 
     // console.log(objectByName.skeleton.bones);

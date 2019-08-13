@@ -3,7 +3,7 @@ window.$ = jQuery;
 window.jQuery = jQuery;
 
 import{clickUiInformation} from "./clickCard";
-import renderInit from "./renderInit";
+import {renderInit} from "./renderInit";
 
 
 

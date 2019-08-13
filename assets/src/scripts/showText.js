@@ -5,6 +5,7 @@ import{ clickCardArrow, clickCardClose} from "./clickCard";
 
 let text = {
     1: {
+        scene :scene01,
         0: "Hallo wie schön das du auf meiner Webseite und Lebenslauf gelandet bist",
         1: ">>Houston, Tranquility Base here. The Eagle has landed<<",
         2: "Jetzt zu mir. Ich heiße Benedikt Grether und bin zurzeit 29 Jahre alt.",
@@ -15,6 +16,7 @@ let text = {
         }
     },
     2: {
+        scene: scene02,
         0: "Enemenemuh du bist ne kuh",
     }
 }

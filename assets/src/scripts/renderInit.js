@@ -1,3 +1,5 @@
+import {startingSmokeAnimation, newPositionSmoke} from './smoke';
+
 var camera, scene, renderer;
 var controls;
 var aspect = window.innerWidth / window.innerHeight;
@@ -8,6 +10,8 @@ var isControlEnable = false;
 
 var smoke = [];
 var renderSmoke = true;
+// var positionSmoke = false;
+// var showModel = true;
 
 
 var keyboard = {};
@@ -317,7 +321,7 @@ function renderInit() {
         }
         // controls.update();
         if(renderSmoke == true){
-            startingSmokeAnimation();
+            startingSmokeAnimation(objectByName, renderSmoke);
         }
         camera.lookAt(objectByName.position);
         requestAnimationFrame(function () {
@@ -541,48 +545,11 @@ window.addEventListener('keydown', keyDown);
 window.addEventListener('keyup', keyUp);
 
 
-export default renderInit;
 
-var charVisibility = false;
-
-function startingSmokeAnimation() {
-    if (renderSmoke == true) {
-        if (smoke[0].scale.x > 0) {
-            if (smoke[0].position.y > 0.4 && charVisibility == false) {
-                objectByName.visible = true;
-                charVisibility = true;
-            }
-            smoke[0].position.y += Math.sin(1) * 0.015;
-            smoke[0].scale.x -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-            smoke[0].scale.y -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-            smoke[0].scale.z -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-        }else{
-            showInformation();
-            renderSmoke = false;
-        }
-        if (smoke[1].scale.x > 0) {
-            smoke[1].position.y += Math.sin(1) * 0.016;
-            smoke[1].scale.x -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-            smoke[1].scale.y -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-            smoke[1].scale.z -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-        }
-        if (smoke[2].scale.x > 0) {
-            smoke[2].position.y += Math.sin(1) * 0.017;
-            smoke[2].scale.x -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-            smoke[2].scale.y -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-            smoke[2].scale.z -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-        }
-        if (smoke[3].scale.x > 0) {
-            smoke[3].position.y += Math.sin(1) * 0.018;
-            smoke[3].scale.x -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-            smoke[3].scale.y -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-            smoke[3].scale.z -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-        }
-        if (smoke[4].scale.x > 0) {
-            smoke[4].position.y += Math.sin(1) * 0.019;
-            smoke[4].scale.x -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-            smoke[4].scale.y -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-            smoke[4].scale.z -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
-        }
-    }
-}
+export {
+    renderInit,
+    startingSmokeAnimation,
+    newPositionSmoke,
+    showInformation,
+    smoke
+};

@@ -3,6 +3,7 @@ window.$ = jQuery;
 window.jQuery = jQuery;
 
 import showText from "./showText";
+import {newPositionSmoke} from "./renderInit";
 
 var i;
 var j;
@@ -21,6 +22,7 @@ const clickCardClose = () =>{
     $('.card-text').empty();
     $('.card-close').hide(); 
     $('.card-wrapper, .card').hide();
+    setTimeout(function(){newPositionSmoke(false)}, 500);
 }
 
 const clickUiInformation = () => {

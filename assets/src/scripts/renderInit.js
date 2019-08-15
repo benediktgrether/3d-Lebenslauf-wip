@@ -109,6 +109,12 @@ var models = {
         mtl: "assets/dist/object/smoke/smoke.mtl",
         name: "smoke",
         mesh: null
+    },
+    lunar: {
+        obj: "assets/dist/object/lunar/lunar_landar_06.obj",
+        mtl: "assets/dist/object/lunar/lunar_landar_06.mtl",
+        name: "lunar",
+        mesh: null
     }
 };
 
@@ -367,6 +373,7 @@ function onResourcesLoad() {
     meshes["gras04"] = models.gras.mesh.clone();
     meshes["gras05"] = models.gras.mesh.clone();
     meshes["gras06"] = models.gras.mesh.clone();
+    meshes["lunar"] = models.lunar.mesh.clone();
 
     meshes["smoke00"] = models.smoke.mesh.clone();
     meshes["smoke01"] = models.smoke.mesh.clone();
@@ -425,6 +432,8 @@ function onResourcesLoad() {
     meshes["smoke04"].position.set(0.7, -2.5 + 2.2, -0.9);
     meshes["smoke04"].scale.set(0.2, 0.2, 0.2);
 
+    meshes["lunar"].position.set(0.8, 2, -0.8)
+
     // meshes["char"].rotation.y = -45 * Math.PI / 180;
     // meshes["char"].scale.set(0.05, 0.05, 0.05);
 
@@ -444,7 +453,7 @@ function onResourcesLoad() {
     scene.add(meshes["street08"]);
     scene.add(meshes["street09"]);
     scene.add(meshes["street10"]);
-    scene.add(meshes["home"]);
+    // scene.add(meshes["home"]);
     scene.add(meshes["char"]);
     scene.add(meshes["gras01"]);
     scene.add(meshes["gras02"]);
@@ -458,6 +467,9 @@ function onResourcesLoad() {
     scene.add(meshes["smoke02"]);
     scene.add(meshes["smoke03"]);
     scene.add(meshes["smoke04"]);
+    
+    scene.add(meshes["lunar"]);
+    console.log(meshes["lunar"])
 
     for (let index = 0; index < 5; index++) {
         smoke[index] = meshes["smoke0" + [index]];

@@ -1,4 +1,5 @@
 import {startingSmokeAnimation, newPositionSmoke} from './smoke';
+import {moveToNewLocation, moveToLocation, initTween, tweenUpdate} from "./moveToNewLocation";
 
 var camera, scene, renderer;
 var controls;
@@ -265,6 +266,7 @@ function renderInit() {
     };
     var folder1 = gui.addFolder('enableControls');
     folder1.add(settings, 'enable Controls').onChange(setEnableControls);
+    folder1.open();
 
     function setEnableControls(enableControls) {
         // enableControls = enableControls;
@@ -300,8 +302,6 @@ function renderInit() {
 
     //# endregion
 
-    var prevTime = Date.now();
-
     var animate = function () {
 
         if (RESOURCES_LOADED == false) {
@@ -318,11 +318,22 @@ function renderInit() {
 
         if (isControlEnable == true) {
             controls.update();
+            // TWEEN.update();
         }
         // controls.update();
         if(renderSmoke == true){
             startingSmokeAnimation(objectByName, renderSmoke);
         }
+         
+
+        if(moveToLocation == true){
+            moveToNewLocation(true);
+            // TWEEN.update();
+        }
+        if(tweenUpdate == true){
+            TWEEN.update();
+        }
+        // TWEEN.update();
         camera.lookAt(objectByName.position);
         requestAnimationFrame(function () {
             animate(renderer, scene, camera);
@@ -456,12 +467,15 @@ function onResourcesLoad() {
     objectByName = meshes["char"];
     objectByName.visible = false;
 
-
+    console.log(objectByName.position);
+    
+    // initTween(1);
     // console.log(objectByName.skeleton.bones);
     // collidableMeshList.push(meshes["home"]);
 }
 function showInformation() {
-    $('.ui-information-wrapper').css({ 'display': 'flex' })
+    $('.ui-information-wrapper').css({ 'display': 'flex' });
+    $('.ui-information-wrapper').addClass('ui-information--bounce');
 }
 
 // function loadSmoke() {
@@ -551,5 +565,8 @@ export {
     startingSmokeAnimation,
     newPositionSmoke,
     showInformation,
-    smoke
+    smoke,
+    camera,
+    objectByName,
+    renderSmoke
 };

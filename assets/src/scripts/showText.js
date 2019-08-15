@@ -5,7 +5,6 @@ import{ clickCardArrow, clickCardClose} from "./clickCard";
 
 let text = {
     1: {
-        scene :scene01,
         0: "Hallo wie schön das du auf meiner Webseite und Lebenslauf gelandet bist",
         1: ">>Houston, Tranquility Base here. The Eagle has landed<<",
         2: "Jetzt zu mir. Ich heiße Benedikt Grether und bin zurzeit 29 Jahre alt.",
@@ -16,8 +15,22 @@ let text = {
         }
     },
     2: {
-        scene: scene02,
         0: "Enemenemuh du bist ne kuh",
+        animation: {
+            cameraX: 40,
+            cameraZ: 10, 
+            object: "test",
+            text: 0
+        }
+    },
+    3: {
+        0: "Die Paula ist ne Kuh",
+        animation: {
+            cameraX: 40,
+            cameraZ: 20, 
+            object: "test",
+            text: 0
+        }
     }
 }
 let message;
@@ -32,6 +45,7 @@ const showText = (target, getI, getJ, index, interval) => {
     // Show Text needed a if question to check if text != null
     i = getI;
     j = getJ;
+    console.log(i, j);
     message = text[i][j];
     checkNextMessage = text[i][j + 1];
     getText(target, message, index, interval);
@@ -62,4 +76,7 @@ $('.card-close').on('click',function(){
     clickCardClose();
 })
 
-export default showText;
+export {
+    showText,
+    text
+}

@@ -1,5 +1,6 @@
 // var renderSmoke = true;
-import {smoke, showInformation} from "./renderInit";
+import {smoke, showInformation, objectByName} from "./renderInit";
+import {moveToNewLocation, moveToLocation} from "./moveToNewLocation";
 import jQuery from "jquery";
 window.$ = jQuery;
 window.jQuery = jQuery;
@@ -17,7 +18,10 @@ function startingSmokeAnimation(objectByName, renderSmoke) {
             }
             else if(smoke[0].position.y > 0.4 && charVisibility == true && showModel == false){
                 objectByName.visible = false;
-                charVisibility = false;  
+                charVisibility = false;
+                setTimeout(function(){moveToNewLocation(true)}, 5000);  
+                // setTimeout(function(){moveToLocation = true}, 5000); 
+                console.log(moveToLocation); 
             }
             smoke[0].position.y += Math.sin(1) * 0.015;
             smoke[0].scale.x -= (Math.sin(1) * 0.001, Math.sin(1) * 0.001, Math.sin(1) * 0.001);
@@ -58,11 +62,11 @@ function startingSmokeAnimation(objectByName, renderSmoke) {
 
 function newPositionSmoke(getShowModel){
     showModel = getShowModel;
-    smoke[0].position.set(0.8, -2.5 + 1.5, -0.8);
-    smoke[1].position.set(0.8, -2.5 + 1.7, -1);
-    smoke[2].position.set(0.8, -2.5 + 1.8, -0.5);    
-    smoke[3].position.set(0.8, -2.5 + 2, -0.8);
-    smoke[4].position.set(0.7, -2.5 + 2.2, -0.9);
+    smoke[0].position.set(objectByName.position.x, -2.5 + 1.5, -0.8);
+    smoke[1].position.set(objectByName.position.x, -2.5 + 1.7, -1);
+    smoke[2].position.set(objectByName.position.x, -2.5 + 1.8, -0.5);    
+    smoke[3].position.set(objectByName.position.x, -2.5 + 2, -0.8);
+    smoke[4].position.set(objectByName.position.x - 0.1, -2.5 + 2.2, -0.9);
     
     smoke[0].scale.set(0.5, 0.5, 0.5);
     smoke[1].scale.set(0.45, 0.45, 0.45);
@@ -71,7 +75,7 @@ function newPositionSmoke(getShowModel){
     smoke[4].scale.set(0.2, 0.2, 0.2);
     
     // positionSmoke = true;
-    renderSmoke = true;
+    // renderSmoke = true;
 }
 
 export {

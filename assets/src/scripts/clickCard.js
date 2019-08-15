@@ -2,11 +2,12 @@ import jQuery from "jquery";
 window.$ = jQuery;
 window.jQuery = jQuery;
 
-import showText from "./showText";
+import {showText, text} from "./showText";
 import {newPositionSmoke} from "./renderInit";
+import {initTween} from "./moveToNewLocation";
 
-var i;
-var j;
+let i = 1;
+let j = 0;
 
 
 const clickCardArrow = (getI, getJ) =>{
@@ -22,7 +23,12 @@ const clickCardClose = () =>{
     $('.card-text').empty();
     $('.card-close').hide(); 
     $('.card-wrapper, .card').hide();
-    setTimeout(function(){newPositionSmoke(false)}, 500);
+    if(text[i + 1 ] != undefined){
+        i = i + 1;
+        j = 0;
+        initTween(i);
+        setTimeout(function(){newPositionSmoke(false)}, 500);
+    }
 }
 
 const clickUiInformation = () => {
@@ -31,12 +37,13 @@ const clickUiInformation = () => {
         $('.ui-information-wrapper').removeClass('ui-information--bounce');
         $('.ui-information-wrapper').hide();
         setTimeout(function () { $('.card-wrapper, .card').show() }, 200);
-        setTimeout(function () {showText(".card-text", 1, 0, 0, 100)}, 700);    
+        setTimeout(function () {showText(".card-text", i, j, 0, 100)}, 700);    
     })
 }
 
 export {
     clickCardArrow,
     clickCardClose,
-    clickUiInformation
+    clickUiInformation,
+    i
 };

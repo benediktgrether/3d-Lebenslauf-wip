@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="/assets/dist/js/components/MTLLoader.js"></script>
 	<script type="text/javascript" src="/assets/dist/js/components/GLTFLoader.js"></script>
 	<script type="text/javascript" src="/assets/dist/js/components/dat.gui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
 	<script>
 		(function () { var script = document.createElement('script'); script.onload = function () { var stats = new Stats(); document.body.appendChild(stats.dom); requestAnimationFrame(function loop() { stats.update(); requestAnimationFrame(loop) }); }; script.src = '//mrdoob.github.io/stats.js/build/stats.min.js'; document.head.appendChild(script); })()
 	</script>
@@ -31,7 +32,7 @@
 </head>
 
 <body>
-	<div class="ui-information-wrapper ui-information--bounce ">
+	<div class="ui-information-wrapper">
 		<div class="ui-information"><i class="fa fa-info" aria-hidden="true"></i></div>
 	</div>
 	<div class="card-wrapper">

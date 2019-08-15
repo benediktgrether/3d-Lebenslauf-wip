@@ -7,16 +7,12 @@ let moveToLocation = false;
 var clock;
 clock = new THREE.Clock();
 let i;
-// initClickCard();
-// console.log(text[i].animation.cameraZ);
-// var position;
-// var target;
+
 var tween;
 let tweenUpdate = false;
 
 function initTween(getI) {
     i = getI;
-    // console.log(objectByName.position.x);
     var position = { x: objectByName.position.x };
     var target = { x: text[i].animation.cameraZ };
     tween = new TWEEN.Tween(position).to(target, 5000);
@@ -35,8 +31,7 @@ function initTween(getI) {
         console.log('done!');
         console.log(objectByName.position.x);
         tweenUpdate = false;
-        i ++;
-        // startingSmokeAnimation(objectByName, renderSmoke);
+        i ++;;
         setTimeout(function(){newPositionSmoke(true)}, 500);
       });
 }

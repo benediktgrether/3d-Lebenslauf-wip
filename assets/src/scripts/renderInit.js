@@ -1,5 +1,5 @@
 import {startingSmokeAnimation, newPositionSmoke} from './smoke';
-import {moveToNewLocation, moveToLocation, initTween, tweenUpdate} from "./moveToNewLocation";
+import {moveToNewLocation, moveToLocation, tweenUpdate} from "./moveToNewLocation";
 
 var camera, scene, renderer;
 var controls;
@@ -469,9 +469,6 @@ function onResourcesLoad() {
 
     console.log(objectByName.position);
     
-    // initTween(1);
-    // console.log(objectByName.skeleton.bones);
-    // collidableMeshList.push(meshes["home"]);
 }
 function showInformation() {
     $('.ui-information-wrapper').css({ 'display': 'flex' });

@@ -5,10 +5,6 @@ window.jQuery = jQuery;
 import{clickUiInformation} from "./clickCard";
 import {renderInit} from "./renderInit";
 
-
-
-
-
 $(document).ready(function () {
 
     var getHeight = $('.card-wrapper').height();
@@ -25,8 +21,6 @@ $(document).ready(function () {
     //     showText(".card-text", 1, 0, 0, 100);    
     // }); 
     renderInit();
-
-
 });
 
 clickUiInformation();

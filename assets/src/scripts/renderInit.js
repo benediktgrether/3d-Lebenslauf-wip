@@ -1,5 +1,6 @@
-import {startingSmokeAnimation, newPositionSmoke} from './smoke';
-import {moveToNewLocation, moveToLocation, tweenUpdate} from "./moveToNewLocation";
+import { startingSmokeAnimation, newPositionSmoke } from './smoke';
+import { moveToNewLocation, moveToLocation, tweenUpdate } from "./moveToNewLocation";
+import { objectLoad, objectByName, RESOURCES_LOADED } from "./objectLoad";
 
 var camera, scene, renderer;
 var controls;
@@ -25,6 +26,7 @@ var PLAYERSPEED = 25;
 
 var clock;
 clock = new THREE.Clock();
+
 //#region Loading Screen
 
 var loadingScreen = {
@@ -36,93 +38,8 @@ var loadingScreen = {
     )
 };
 
-var LOADING_MANAGER = null;
-var RESOURCES_LOADED = false;
-
 //#endregion
 
-//#region Models
-
-var models = {
-    friTree: {
-        obj: "assets/dist/object/tree/fri/fri_tree.obj",
-        mtl: "assets/dist/object/tree/fri/fri_tree.mtl",
-        // path: "tree/fri/",
-        name: "fri_tree",
-        postionX: 0,
-        postionY: 0,
-        postionZ: 2,
-        mesh: null
-    },
-    LowTree: {
-        obj: "assets/dist/object/tree/low-poly-tree/low_tree.obj",
-        mtl: "assets/dist/object/tree/low-poly-tree/low_tree.mtl",
-        // path: "tree/fri/",
-        name: "low_tree",
-        postionX: 0,
-        postionY: 0,
-        postionZ: 2,
-        mesh: null
-    },
-    street: {
-        obj: "assets/dist/object/street/street.obj",
-        mtl: "assets/dist/object/street/street.mtl",
-        // path: "street/",
-        name: "street",
-        postionX: 0,
-        postionY: 0.1,
-        postionZ: 0,
-        mesh: null
-    },
-    home: {
-        obj: "assets/dist/object/building/home.obj",
-        mtl: "assets/dist/object/building/home.mtl",
-        // path: "building/",
-        name: "home",
-        postionX: 0,
-        postionY: 0.1,
-        postionZ: -2,
-        mesh: null
-    },
-    char: {
-        obj: "assets/dist/object/char/char_no_rigging.obj",
-        mtl: "assets/dist/object/char/char_no_rigging.mtl",
-        // path: "building/",
-        name: "char",
-        postionX: 0,
-        postionY: 0.1,
-        postionZ: -2,
-        mesh: null
-    },
-    gras: {
-        obj: "assets/dist/object/enviroment/gras.obj",
-        mtl: "assets/dist/object/enviroment/gras.mtl",
-        // path: "building/",
-        name: "gras",
-        postionX: 0,
-        postionY: 0.1,
-        postionZ: -2,
-        mesh: null
-    },
-    smoke: {
-        obj: "assets/dist/object/smoke/smoke.obj",
-        mtl: "assets/dist/object/smoke/smoke.mtl",
-        name: "smoke",
-        mesh: null
-    },
-    lunar: {
-        obj: "assets/dist/object/lunar/lunar_landar_06.obj",
-        mtl: "assets/dist/object/lunar/lunar_landar_06.mtl",
-        name: "lunar",
-        mesh: null
-    }
-};
-
-var meshes = {};
-var objectByName;
-var collidableMeshList = [];
-
-//#endregion
 function renderInit() {
     scene = new THREE.Scene();
 
@@ -142,18 +59,7 @@ function renderInit() {
     loadingScreen.camera.lookAt(loadingScreen.box.position);
     loadingScreen.scene.add(loadingScreen.box);
 
-    var loadingManager = new THREE.LoadingManager();
-
-
-    loadingManager.onProgress = function (item, loaded, total) {
-        console.log(item, loaded, total);
-    };
-
-    loadingManager.onLoad = function () {
-        console.log("loaded all resources");
-        RESOURCES_LOADED = true;
-        onResourcesLoad();
-    }
+    objectLoad();
     //#endregion
 
 
@@ -185,6 +91,7 @@ function renderInit() {
     //#region spotLight
     var spotLight = new THREE.SpotLight(0xffffff);
     spotLight.position.set(3, 14, 12);
+    spotLight.intensity = 5;
     spotLight.castShadow = true;
     // spotLight.shadow.radius = 4;
 
@@ -223,36 +130,6 @@ function renderInit() {
 
     //#endregion
 
-    //#region OBJ Loader
-
-
-    for (var _key in models) {
-        (function (key) {
-            var mtlLoader = new THREE.MTLLoader(loadingManager);
-            mtlLoader.load(models[key].mtl, function (materials) {
-                materials.preload();
-
-                var objLoader = new THREE.OBJLoader(loadingManager);
-                objLoader.setMaterials(materials);
-                objLoader.load(models[key].obj, function (mesh) {
-
-                    mesh.traverse(function (node) {
-                        if (node instanceof THREE.Mesh) {
-                            node.castShadow = true;
-                            node.receiveShadow = true;
-                        }
-                    });
-                    mesh.name = '"' + models[key].name + '"';
-                    models[key].mesh = mesh;
-
-                });
-            });
-        })(_key);
-    }
-    //#endregion
-
-    // loadSmoke();
-
     //#region Light UI
 
     var light = gui.addFolder('spotLight');
@@ -282,24 +159,6 @@ function renderInit() {
             controls.update();
         }
     }
-    // function showSkeleton(visibility) {
-    //     skeleton.visible = visibility;
-    // }
-    // cameraGui.open();
-
-    // var charGui = gui.addFolder('Char');
-    // charGui.add(objectByName.position, 'x', 0, 50);
-
-    //#endregion
-
-    //#region shadow
-
-    //Set up shadow properties for the light
-    // light.shadow.mapSize.width = 512;  // default
-    // light.shadow.mapSize.height = 512; // default
-    // light.shadow.camera.near = 0.5;       // default
-    // light.shadow.camera.far = 500      // default
-    //#endregion
 
     //#region Controls
 
@@ -326,11 +185,10 @@ function renderInit() {
             controls.update();
             // TWEEN.update();
         }
-        // controls.update();
         if(renderSmoke == true){
             startingSmokeAnimation(objectByName, renderSmoke);
         }
-         
+
 
         if(moveToLocation == true){
             moveToNewLocation(true);
@@ -348,164 +206,11 @@ function renderInit() {
     animate();
 }
 
-function onResourcesLoad() {
-    meshes["friTree01"] = models.friTree.mesh.clone();
-    meshes["friTree02"] = models.friTree.mesh.clone();
-    meshes["friTree03"] = models.friTree.mesh.clone();
-    meshes["friTree04"] = models.friTree.mesh.clone();
-    meshes["lowTree01"] = models.LowTree.mesh.clone();
-    meshes["lowTree02"] = models.LowTree.mesh.clone();
-    meshes["street01"] = models.street.mesh.clone();
-    meshes["street02"] = models.street.mesh.clone();
-    meshes["street03"] = models.street.mesh.clone();
-    meshes["street04"] = models.street.mesh.clone();
-    meshes["street05"] = models.street.mesh.clone();
-    meshes["street06"] = models.street.mesh.clone();
-    meshes["street07"] = models.street.mesh.clone();
-    meshes["street08"] = models.street.mesh.clone();
-    meshes["street09"] = models.street.mesh.clone();
-    meshes["street10"] = models.street.mesh.clone();
-    meshes["home"] = models.home.mesh.clone();
-    meshes["char"] = models.char.mesh.clone();
-    meshes["gras01"] = models.gras.mesh.clone();
-    meshes["gras02"] = models.gras.mesh.clone();
-    meshes["gras03"] = models.gras.mesh.clone();
-    meshes["gras04"] = models.gras.mesh.clone();
-    meshes["gras05"] = models.gras.mesh.clone();
-    meshes["gras06"] = models.gras.mesh.clone();
-    meshes["lunar"] = models.lunar.mesh.clone();
 
-    meshes["smoke00"] = models.smoke.mesh.clone();
-    meshes["smoke01"] = models.smoke.mesh.clone();
-    meshes["smoke02"] = models.smoke.mesh.clone();
-    meshes["smoke03"] = models.smoke.mesh.clone();
-    meshes["smoke04"] = models.smoke.mesh.clone();
-
-    meshes["friTree01"].position.set(0.5, 0, 2);
-    meshes["friTree02"].position.set(-0.5, 0, 1.5);
-    meshes["friTree03"].position.set(3, 0, 1.5);
-    meshes["friTree04"].position.set(4, 0, 2.5);
-
-    meshes["lowTree01"].position.set(2, 0, 2.5);
-    meshes["lowTree02"].position.set(5, 0, 1.5);
-    meshes["lowTree01"].rotation.y = -Math.PI / 2;
-    meshes["lowTree01"].scale.set(0.5, 0.5, 0.5);
-    meshes["lowTree02"].scale.set(0.5, 0.5, 0.5);
-
-    meshes["street01"].position.set(-4, 0.1, 0);
-    meshes["street02"].position.set(-2, 0.1, 0);
-    meshes["street03"].position.set(0, 0.1, 0);
-    meshes["street04"].position.set(2, 0.1, 0);
-    meshes["street05"].position.set(4, 0.1, 0);
-    meshes["street06"].position.set(6, 0.1, 0);
-    meshes["street07"].position.set(8, 0.1, 0);
-    meshes["street08"].position.set(10, 0.1, 0);
-    meshes["street09"].position.set(12, 0.1, 0);
-    meshes["street10"].position.set(14, 0.1, 0);
-
-    meshes["gras01"].position.set(-4, 0.1, 2);
-    meshes["gras02"].position.set(-2, 0.1, 2);
-    meshes["gras03"].position.set(0, 0.1, 2);
-    meshes["gras04"].position.set(2, 0.1, 2);
-    meshes["gras05"].position.set(4, 0.1, 2);
-    meshes["gras06"].position.set(6, 0.1, 2);
-
-    meshes["home"].position.set(1, 0.05, -3);
-    meshes["home"].scale.set(2, 2, 2);
-
-    meshes["char"].position.set(0.8, 0.17, -0.8);
-    meshes["char"].rotation.y = -Math.PI / 2;
-
-    // meshes["smoke00"].position.set(0.8, 0.5, -0.8);
-    meshes["smoke00"].position.set(0.8, -2.5 + 1.5, -0.8);
-    meshes["smoke00"].scale.set(0.5, 0.5, 0.5);
-
-    meshes["smoke01"].position.set(0.8, -2.5 + 1.7, -1);
-    meshes["smoke01"].scale.set(0.45, 0.45, 0.45);
-
-    meshes["smoke02"].position.set(0.8, -2.5 + 1.8, -0.5);
-    meshes["smoke02"].scale.set(0.3, 0.3, 0.3);
-
-    meshes["smoke03"].position.set(0.8, -2.5 + 2, -0.8);
-    meshes["smoke03"].scale.set(0.25, 0.25, 0.25);
-
-    meshes["smoke04"].position.set(0.7, -2.5 + 2.2, -0.9);
-    meshes["smoke04"].scale.set(0.2, 0.2, 0.2);
-
-    meshes["lunar"].position.set(0.8, 2, -0.8)
-
-    // meshes["char"].rotation.y = -45 * Math.PI / 180;
-    // meshes["char"].scale.set(0.05, 0.05, 0.05);
-
-    scene.add(meshes["friTree01"]);
-    scene.add(meshes["friTree02"]);
-    scene.add(meshes["friTree03"]);
-    scene.add(meshes["friTree04"]);
-    scene.add(meshes["lowTree01"]);
-    scene.add(meshes["lowTree02"]);
-    scene.add(meshes["street01"]);
-    scene.add(meshes["street02"]);
-    scene.add(meshes["street03"]);
-    scene.add(meshes["street04"]);
-    scene.add(meshes["street05"]);
-    scene.add(meshes["street06"]);
-    scene.add(meshes["street07"]);
-    scene.add(meshes["street08"]);
-    scene.add(meshes["street09"]);
-    scene.add(meshes["street10"]);
-    // scene.add(meshes["home"]);
-    scene.add(meshes["char"]);
-    scene.add(meshes["gras01"]);
-    scene.add(meshes["gras02"]);
-    scene.add(meshes["gras03"]);
-    scene.add(meshes["gras04"]);
-    scene.add(meshes["gras05"]);
-    scene.add(meshes["gras06"]);
-
-    scene.add(meshes["smoke00"]);
-    scene.add(meshes["smoke01"]);
-    scene.add(meshes["smoke02"]);
-    scene.add(meshes["smoke03"]);
-    scene.add(meshes["smoke04"]);
-    
-    scene.add(meshes["lunar"]);
-    console.log(meshes["lunar"])
-
-    for (let index = 0; index < 5; index++) {
-        smoke[index] = meshes["smoke0" + [index]];
-
-    }
-
-    objectByName = meshes["char"];
-    objectByName.visible = false;
-
-    console.log(objectByName.position);
-    
-}
 function showInformation() {
     $('.ui-information-wrapper').css({ 'display': 'flex' });
     $('.ui-information-wrapper').addClass('ui-information--bounce');
 }
-
-// function loadSmoke() {
-//     var loader = new THREE.GLTFLoader();
-//     loader.load('/assets/dist/object/smoke/smoke02.gltf', function (gltf) {
-//         var model = gltf.scene;
-//         model.position.y = 0.1;
-//         // model.scale.set(0.25, 0.25, 0.25);
-//         // model.rotation.y = Math.PI/2;
-//         scene.add(model);
-//         objectByName = model;
-//         model.traverse(function (object) {
-//             if (object.isMesh) object.castShadow = true;
-//         });
-//         // mixer = new THREE.AnimationMixer(model);
-//         // mixer.clipAction(gltf.animations[0]).play();
-//         // console.log(mixer.clipAction(gltf.animations[0]));
-//         //
-//         console.log(model);
-//     });
-// }
 
 function onWindowResize() {
 
@@ -576,6 +281,7 @@ export {
     showInformation,
     smoke,
     camera,
+    scene,
     objectByName,
     renderSmoke
 };

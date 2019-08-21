@@ -1,6 +1,7 @@
 import { startingSmokeAnimation, newPositionSmoke } from './smoke';
-import { moveToNewLocation, moveToLocation, tweenUpdate } from "./moveToNewLocation";
+// import { moveToNewLocation, moveToLocation, tweenUpdate } from "./moveToNewLocation";
 import { objectLoad, objectByName, RESOURCES_LOADED } from "./objectLoad";
+import { tweenUpdate } from "./lunarLanding";
 
 var camera, scene, renderer;
 var controls;
@@ -108,12 +109,12 @@ function renderInit() {
     //#enregion
 
     //#region Plane Ground
-    var geometry = new THREE.PlaneGeometry(20, 20, 20);
-    var material = new THREE.MeshBasicMaterial({ color: 0x25781f, side: THREE.DoubleSide });
-    var planeGround = new THREE.Mesh(geometry, material);
-    planeGround.rotation.x = -Math.PI / 2;
-    planeGround.name = "plane";
-    scene.add(planeGround);
+    // var geometry = new THREE.PlaneGeometry(20, 20, 20);
+    // var material = new THREE.MeshBasicMaterial({ color: 0x25781f, side: THREE.DoubleSide });
+    // var planeGround = new THREE.Mesh(geometry, material);
+    // planeGround.rotation.x = -Math.PI / 2;
+    // planeGround.name = "plane";
+    // scene.add(planeGround);
 
 
     //Shadow for Plane Material
@@ -162,8 +163,8 @@ function renderInit() {
 
     //#region Controls
 
-    // var controls = new THREE.OrbitControls(camera, renderer.domElement);
-    // controls.update();
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.update();
 
     //# endregion
 
@@ -185,20 +186,22 @@ function renderInit() {
             controls.update();
             // TWEEN.update();
         }
-        if(renderSmoke == true){
-            startingSmokeAnimation(objectByName, renderSmoke);
-        }
+
+        
+        // if(renderSmoke == true){
+        //     startingSmokeAnimation(objectByName, renderSmoke);
+        // }
 
 
-        if(moveToLocation == true){
-            moveToNewLocation(true);
-            // TWEEN.update();
-        }
+        // if(moveToLocation == true){
+        //     moveToNewLocation(true);
+        //     // TWEEN.update();
+        // }
         if(tweenUpdate == true){
             TWEEN.update();
         }
         // TWEEN.update();
-        camera.lookAt(objectByName.position);
+        // camera.lookAt(objectByName.position);
         requestAnimationFrame(function () {
             animate(renderer, scene, camera);
         });

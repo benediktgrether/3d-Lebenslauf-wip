@@ -31,7 +31,7 @@ function initTween(getI) {
         console.log('done!');
         console.log(objectByName.position.x);
         tweenUpdate = false;
-        i ++;;
+        i ++;
         setTimeout(function(){newPositionSmoke(true)}, 500);
       });
 }

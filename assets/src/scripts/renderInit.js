@@ -1,7 +1,8 @@
+import { nav, cv }  from "./main";
 import { startingSmokeAnimation, newPositionSmoke } from './smoke';
-// import { moveToNewLocation, moveToLocation, tweenUpdate } from "./moveToNewLocation";
+import { moveToNewLocation, moveToLocation, tweenUpdate } from "./tweenObject";
 import { objectLoad, objectByName, RESOURCES_LOADED } from "./objectLoad";
-import { tweenUpdate } from "./lunarLanding";
+// import { tweenUpdate } from "./lunarLanding";
 
 var camera, scene, renderer;
 var controls;
@@ -177,34 +178,39 @@ function renderInit() {
             return;
         }
 
-        var delta = clock.getDelta();
-        charMovement(delta);
+        if (nav == false) {
+            var delta = clock.getDelta();
+            charMovement(delta);
 
-        renderer.render(scene, camera);
+            renderer.render(scene, camera);
 
-        if (isControlEnable == true) {
-            controls.update();
+            if (isControlEnable == true) {
+                controls.update();
+                // TWEEN.update();
+            }
+
+            if (cv == true) {
+                if (renderSmoke == true) {
+                    startingSmokeAnimation(objectByName, renderSmoke);
+                }
+
+
+                if (moveToLocation == true) {
+                    moveToNewLocation(true);
+                    // TWEEN.update();
+                }
+                camera.lookAt(objectByName.position);
+                spotLight.position.set(3 + objectByName.position.x, 14, 12 + objectByName.position.z);
+            }
+            if (tweenUpdate == true) {
+                TWEEN.update();
+            }
             // TWEEN.update();
+            // camera.lookAt(objectByName.position);
+            requestAnimationFrame(function () {
+                animate(renderer, scene, camera);
+            });
         }
-
-        
-        // if(renderSmoke == true){
-        //     startingSmokeAnimation(objectByName, renderSmoke);
-        // }
-
-
-        // if(moveToLocation == true){
-        //     moveToNewLocation(true);
-        //     // TWEEN.update();
-        // }
-        if(tweenUpdate == true){
-            TWEEN.update();
-        }
-        // TWEEN.update();
-        // camera.lookAt(objectByName.position);
-        requestAnimationFrame(function () {
-            animate(renderer, scene, camera);
-        });
     };
     animate();
 }

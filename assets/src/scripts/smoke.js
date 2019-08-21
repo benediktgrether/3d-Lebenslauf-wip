@@ -1,6 +1,6 @@
 // var renderSmoke = true;
 import {smoke, showInformation, objectByName} from "./renderInit";
-import {moveToNewLocation, moveToLocation} from "./moveToNewLocation";
+import {moveToNewLocation, moveToLocation} from "./tweenObject";
 import jQuery from "jquery";
 window.$ = jQuery;
 window.jQuery = jQuery;
@@ -12,7 +12,9 @@ function startingSmokeAnimation(objectByName, renderSmoke) {
         // showModel = getShowModel;
         if (smoke[0].scale.x > 0) {
             if (smoke[0].position.y > 0.4 && charVisibility == false && showModel == true) {
+                console.log(objectByName.visible);
                 objectByName.visible = true;
+                console.log(objectByName.visible);
                 charVisibility = true;
                 setTimeout(function(){showInformation()}, 5000);
             }

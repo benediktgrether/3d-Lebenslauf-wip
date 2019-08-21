@@ -1,6 +1,8 @@
-import { text } from "./showText";
-import {startingSmokeAnimation, newPositionSmoke} from './smoke';
+import { text, showText } from "./showText";
+import { meshes } from "./objectLoad";
+import { startingSmokeAnimation, newPositionSmoke } from './smoke';
 import { camera, objectByName, renderSmoke } from "./renderInit";
+import { cv } from "./main";
 // import {i} from "./clickCard";
 
 let moveToLocation = false;
@@ -9,7 +11,7 @@ clock = new THREE.Clock();
 let i;
 
 var tween;
-let tweenUpdate = false;
+let tweenUpdate = true;
 
 function initTween(getI) {
     i = getI;
@@ -26,14 +28,14 @@ function initTween(getI) {
         camera.updateProjectionMatrix();
     });
     tween.easing(TWEEN.Easing.Cubic.InOut)
-    
-    tween.onComplete(function() {
+
+    tween.onComplete(function () {
         console.log('done!');
         console.log(objectByName.position.x);
         tweenUpdate = false;
-        i ++;
-        setTimeout(function(){newPositionSmoke(true)}, 500);
-      });
+        i++;
+        setTimeout(function () { newPositionSmoke(true) }, 500);
+    });
 }
 
 
@@ -45,9 +47,31 @@ function moveToNewLocation(getMoveToLocationStatus) {
     moveToLocation = false;
 }
 
+function lunarLandingAnimation() {
+    console.log(meshes["lunar"].position);
+    var position = { y: meshes["lunar"].position.y };
+    var target = { y: 0.94 };
+    console.log(position, target);
+    tween = new TWEEN.Tween(position).to(target, 10000);
+    tween.onUpdate(function () {
+        meshes["lunar"].position.y = position.y;
+    });
+    tween.easing(TWEEN.Easing.Cubic.Out)
+    tween.start();
+    tween.onComplete(function () {
+        console.log('done!');
+        tweenUpdate = false;
+        if(cv == false){
+            setTimeout(function () { $('.card-wrapper, .card').show("slow") }, 1000);
+            setTimeout(function () { showText(".card-text", 1, 0, 0, 100) }, 2000);
+        }
+    });
+}
+
 export {
     moveToNewLocation,
     moveToLocation,
     initTween,
-    tweenUpdate
+    tweenUpdate,
+    lunarLandingAnimation
 }

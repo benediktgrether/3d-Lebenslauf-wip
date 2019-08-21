@@ -4,9 +4,9 @@ window.jQuery = jQuery;
 
 import {showText, text} from "./showText";
 import {newPositionSmoke} from "./renderInit";
-import {initTween} from "./moveToNewLocation";
+import {initTween} from "./tweenObject";
 
-let i = 1;
+let i = 2;
 let j = 0;
 
 
@@ -34,6 +34,11 @@ const clickCardClose = () =>{
 const clickUiInformation = () => {
     $('.ui-information-wrapper').on('click', function(){
         console.log("Bist du hier drin?");
+        $('.card-text').empty();
+        $('.card-arrow').hide();
+        $('.card-close').hide(); 
+        console.log(i);
+        j = 0;
         $('.ui-information-wrapper').removeClass('ui-information--bounce');
         $('.ui-information-wrapper').hide();
         setTimeout(function () { $('.card-wrapper, .card').show() }, 200);

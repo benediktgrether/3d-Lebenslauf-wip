@@ -31,6 +31,15 @@ let text = {
             object: "test",
             text: 0
         }
+    },
+    4: {
+        0: "Die Paula ist ne Kuh",
+        animation: {
+            cameraX: 40,
+            cameraZ: 30, 
+            object: "test",
+            text: 0
+        }
     }
 }
 let message;

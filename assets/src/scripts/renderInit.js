@@ -7,7 +7,7 @@ var camera, scene, renderer;
 var controls;
 var aspect = window.innerWidth / window.innerHeight;
 var d = 2.5;
-const gui = new dat.GUI();
+// const gui = new dat.GUI();
 
 var isControlEnable = false;
 
@@ -133,33 +133,33 @@ function renderInit() {
 
     //#region Light UI
 
-    var light = gui.addFolder('spotLight');
-    light.add(spotLight.position, 'x', 0, 100);
-    light.add(spotLight.position, 'y', 0, 100);
-    light.add(spotLight.position, 'z', 0, 100);
-    // light.open();
+    // var light = gui.addFolder('spotLight');
+    // light.add(spotLight.position, 'x', 0, 100);
+    // light.add(spotLight.position, 'y', 0, 100);
+    // light.add(spotLight.position, 'z', 0, 100);
+    // // light.open();
 
-    var cameraGui = gui.addFolder('camera');
-    cameraGui.add(camera.position, 'x', 0, 50);
-    cameraGui.add(camera.position, 'y', 0, 50);
-    cameraGui.add(camera.position, 'z', 0, 50);
+    // var cameraGui = gui.addFolder('camera');
+    // cameraGui.add(camera.position, 'x', 0, 50);
+    // cameraGui.add(camera.position, 'y', 0, 50);
+    // cameraGui.add(camera.position, 'z', 0, 50);
 
 
-    var settings = {
-        'enable Controls': false
-    };
-    var folder1 = gui.addFolder('enableControls');
-    folder1.add(settings, 'enable Controls').onChange(setEnableControls);
-    folder1.open();
+    // var settings = {
+    //     'enable Controls': false
+    // };
+    // var folder1 = gui.addFolder('enableControls');
+    // folder1.add(settings, 'enable Controls').onChange(setEnableControls);
+    // folder1.open();
 
-    function setEnableControls(enableControls) {
-        // enableControls = enableControls;
-        isControlEnable = enableControls;
-        if (isControlEnable == true) {
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.update();
-        }
-    }
+    // function setEnableControls(enableControls) {
+    //     // enableControls = enableControls;
+    //     isControlEnable = enableControls;
+    //     if (isControlEnable == true) {
+    //         controls = new THREE.OrbitControls(camera, renderer.domElement);
+    //         controls.update();
+    //     }
+    // }
 
     //#region Controls
 

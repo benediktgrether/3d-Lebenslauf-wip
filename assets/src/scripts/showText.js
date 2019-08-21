@@ -5,9 +5,9 @@ import{ clickCardArrow, clickCardClose} from "./clickCard";
 
 let text = {
     1: {
-        0: "Hallo wie schön das du auf meiner Webseite und Lebenslauf gelandet bist",
-        1: ">>Houston, Tranquility Base here. The Eagle has landed<<",
-        2: "Jetzt zu mir. Ich heiße Benedikt Grether und bin zurzeit 29 Jahre alt.",
+        0: ">>Houston, Tranquility Base here. The Eagle has landed<<",
+        1: "Schön dass du auf meiner Portfolio Webseite gelandet bist",
+        2: "Drücke auf das Burgermenü um die Webseite zu entdecken",
         animation: {
             camera: "new position",
             object: "test",

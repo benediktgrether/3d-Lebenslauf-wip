@@ -1,60 +1,96 @@
-.card-wrapper
-    display: none
-    width: 100%
-    position: fixed
-    top: 50%
-    left: 50%
-    transform: translate(-50%)
-    clip: rect(0px, auto, auto, 0px)
-    transform: translate(-50%, -50%) rotateX(20deg) rotateY(59.33333337deg) rotateZ(0deg)
-    z-index: 1
-    +break($break-l)
-        width: auto
+// .card-wrapper
+//     display: none
+//     width: 100%
+//     position: fixed
+//     top: 50%
+//     left: 50%
+//     transform: translate(-50%)
+//     clip: rect(0px, auto, auto, 0px)
+//     transform: translate(-50%, -50%) rotateX(20deg) rotateY(59.33333337deg) rotateZ(0deg)
+//     z-index: 1
+//     +break($break-l)
+//         width: auto
 
-.card-boxshadow
-    position: fixed
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%) rotateX(20deg) rotateY(59.33333337deg) rotateZ(0deg)
-    background: linear-gradient(to right, #36D1DCCC, #5B86E5CC);
-    filter: blur(5px)
-    z-index: 0
+// .card-boxshadow
+//     position: fixed
+//     top: 50%
+//     left: 50%
+//     transform: translate(-50%, -50%) rotateX(20deg) rotateY(59.33333337deg) rotateZ(0deg)
+//     background: linear-gradient(to right, #36D1DCCC, #5B86E5CC);
+//     filter: blur(5px)
+//     z-index: 0
+
+// .card
+//     display: none
+//     position: relative
+//     +break($break-m)
+//         width: 600px
+//         height: 300px
+
+
+// .card-text
+//     padding: 40px 25px
+//     font-size: 3rem
+//     color: white
+//     text-shadow: 1px -1px black,  2px -2px black, 3px -3px black,  4px -4px black, 5px -5px black
+//     // text-shadow: 1px -1px black,  2px -2px black, 3px -3px black,  4px -4px black, 5px -5px black, 6px -6px black
+
+
+// .card-filter
+//     position: absolute
+//     top: -10px
+//     left: -10px
+//     width: 120%
+//     height: 120%
+//     overflow: hidden
+//     background: linear-gradient(to right, #36D1DCCC, #5B86E5CC);
+//     filter: blur(10px)
+//     z-index: -1  
+
+.card-wrapper
+  display: none
+  position: fixed
+  width: 90%
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  background-color: #0b1024
+  border-radius: 10px
+  opacity: 0.95
+
+  +break($break-m)
+    width: auto
 
 .card
-    display: none
-    position: relative
-    +break($break-m)
-        width: 600px
-        height: 300px
-
+  display: none
+  position: relative
+  // width: 100%
+  height: 60vh
+  margin: 5px
+  border: 2px solid #7be6f0
+  border-radius: 10px
+  +break($break-m)
+      width: 600px
+      height: 300px  
 
 .card-text
+  padding: 45px 10px
+  font-size: 2.75rem
+  color: #7be6f0
+  text-shadow: 1px -1px #255085,  2px -2px #255085, 3px -3px #255085,  4px -4px #255085, 5px -5px #255085
+
+  +break($break-m)
     padding: 40px 25px
     font-size: 3rem
-    color: white
-    text-shadow: 1px -1px black,  2px -2px black, 3px -3px black,  4px -4px black, 5px -5px black
-    // text-shadow: 1px -1px black,  2px -2px black, 3px -3px black,  4px -4px black, 5px -5px black, 6px -6px black
-
-
-.card-filter
-    position: absolute
-    top: -10px
-    left: -10px
-    width: 120%
-    height: 120%
-    overflow: hidden
-    background: linear-gradient(to right, #36D1DCCC, #5B86E5CC);
-    filter: blur(10px)
-    z-index: -1  
 
 .card-arrow
     display: none
     position: absolute
-    right: 40px
+    right: 20px
     bottom: 10px
     font-size: 2rem
-    color: white
-    text-shadow: 1px -1px black,  2px -2px black, 3px -3px black,  4px -4px black, 5px -5px black
+    color: #7be6f0
+    text-shadow: 1px -1px #255085,  2px -2px #255085, 3px -3px #255085,  4px -4px #255085, 5px -5px #255085
 
 .card-arrow--bounce  
   animation: card-arrow--bounce 2s infinite;
@@ -73,8 +109,8 @@
 .card-close
   display: none
   position: absolute
-  right: 40px
+  right: 20px
   top: 10px
   font-size: 2rem
-  color: white
-  text-shadow: 1px -1px black,  2px -2px black, 3px -3px black,  4px -4px black, 5px -5px black
+  color: #7be6f0
+  text-shadow: 1px -1px #255085,  2px -2px #255085, 3px -3px #255085,  4px -4px #255085, 5px -5px #255085

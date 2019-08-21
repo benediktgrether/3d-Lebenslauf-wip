@@ -21,6 +21,17 @@ $(document).ready(function () {
     //     showText(".card-text", 1, 0, 0, 100);    
     // }); 
     renderInit();
+    $('.menu-wrapper').on('click', function(){
+        showMenu(this);
+    })
 });
+
+function showMenu(x) {
+    x.classList.toggle("change");
+}
+
+$('.menu-wrapper').on('click', function(){
+    $('.menu-overlay').fadeToggle();
+})
 
 clickUiInformation();

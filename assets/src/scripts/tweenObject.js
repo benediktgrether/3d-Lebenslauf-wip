@@ -1,6 +1,6 @@
 import { text, showText } from "./showText";
 import { meshes } from "./objectLoad";
-import { startingSmokeAnimation, newPositionSmoke } from './smoke';
+import {showHolo} from "./holoFrame";
 import { camera, objectByName, renderSmoke } from "./renderInit";
 import { cv } from "./main";
 // import {i} from "./clickCard";
@@ -32,9 +32,10 @@ function initTween(getI) {
     tween.onComplete(function () {
         console.log('done!');
         console.log(objectByName.position.x);
+        meshes["charHolo"].position.x = objectByName.position.x;
         tweenUpdate = false;
         i++;
-        setTimeout(function () { newPositionSmoke(true) }, 500);
+        setTimeout(function () { showHolo(false) }, 500);
     });
 }
 
@@ -63,7 +64,7 @@ function lunarLandingAnimation() {
         tweenUpdate = false;
         if(cv == false){
             setTimeout(function () { $('.card-wrapper, .card').show("slow") }, 1000);
-            setTimeout(function () { showText(".card-text", 1, 0, 0, 100) }, 2000);
+            setTimeout(function () { showText(".card-text", 1, 0, 0, 80) }, 2000);
         }
     });
 }

@@ -1,7 +1,7 @@
 import jQuery from "jquery";
 window.$ = jQuery;
 window.jQuery = jQuery;
-import{ clickCardArrow, clickCardClose} from "./clickCard";
+import { clickCardArrow, clickCardClose } from "./clickCard";
 
 let text = {
     1: {
@@ -15,28 +15,80 @@ let text = {
         }
     },
     2: {
-        0: "Enemenemuh du bist ne kuh",
+        0: "Hallo hier ist das Hologramm von Benedikt Grether",
+        1: "Geboren bin ich am 13.03.1990 in Lörrach.",
+        2: "Ich werde dich nun durch mein Lebenslauf begleiten.",
         animation: {
             cameraX: 40,
-            cameraZ: 10, 
+            cameraZ: 0,
             object: "test",
             text: 0
         }
     },
     3: {
-        0: "Die Paula ist ne Kuh",
+        0: "Zu meiner Schulbildung.",
+        1: "Im Schuljahr 06/07 habe ich meine Werkrealschulabschluss",
+        2: "an der Freien Evangelischen Schule in Lörrach gemacht.",
+        3: "Im Schuljahr 07/08 besuchte ich das",
+        4: "Informationstechnische Gymnasium in Lörrach.",
         animation: {
             cameraX: 40,
-            cameraZ: 20, 
+            cameraZ: 10,
             object: "test",
             text: 0
         }
     },
     4: {
-        0: "Die Paula ist ne Kuh",
+        0: "Im Jahr 08/11 absolvierte ich eine Ausbildung zum",
+        1: "Eisenbahner im Betriebsdienst Fachrichtung Lokführer & Transport",
         animation: {
             cameraX: 40,
-            cameraZ: 30, 
+            cameraZ: 20,
+            object: "test",
+            text: 0
+        }
+    },
+    5: {
+        0: "Von 11/12 arbeitete ich als Auslandslokführer",
+        1: "für die Deutsche Bahn AG",
+        animation: {
+            cameraX: 40,
+            cameraZ: 30,
+            object: "test",
+            text: 0
+        }
+    },
+    6: {
+        0: "Von 12/13 besuchte ich das Berufskolleg",
+        1: "in Weil am Rhein mit der Fachrichtung",
+        2: "Technische Physik",
+        animation: {
+            cameraX: 40,
+            cameraZ: 40,
+            object: "test",
+            text: 0
+        }
+    },
+    7: {
+        0: "Von 13/16 Absolvierte ich die Ausbildung",
+        1: "zum Staatlich Annerkanten Grafik Designer",
+        2: "auf der Akademie für Kommunikation",
+        3:"in Freiburg",
+        animation: {
+            cameraX: 40,
+            cameraZ: 50,
+            object: "test",
+            text: 0
+        }
+    },
+    8: {
+        0: "Seit 2016 besuche ich die Hochschule Furtwangen",
+        1: "Studiengang Medieninformatik B. Sc",
+        2: "Im Wintersemester 17/18 absolvierte ich ein Praxissemster",
+        3: "bei der Land in Sicht AG in Sulzburg",
+        animation: {
+            cameraX: 40,
+            cameraZ: 60,
             object: "test",
             text: 0
         }
@@ -70,18 +122,18 @@ const getText = (target, message, index, interval) => {
             setTimeout(function () { $('.card-arrow').show() }, 500);
             $('.card-arrow').addClass('card-arrow--bounce');
         } else {
-            setTimeout(function(){ 
+            setTimeout(function () {
                 $('.card-close').show()
             }, 500);
         }
     }
 }
 
-$('.card-arrow').on('click', function(){
+$('.card-arrow').on('click', function () {
     clickCardArrow(i, j);
 })
 
-$('.card-close').on('click',function(){
+$('.card-close').on('click', function () {
     clickCardClose();
 })
 

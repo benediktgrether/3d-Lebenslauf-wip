@@ -5,6 +5,7 @@ window.jQuery = jQuery;
 import {showText, text} from "./showText";
 import {newPositionSmoke} from "./renderInit";
 import {initTween} from "./tweenObject";
+import {hideHoloForMovement} from "./holoFrame";
 
 let i = 2;
 let j = 0;
@@ -16,7 +17,7 @@ const clickCardArrow = (getI, getJ) =>{
     $('.card-text').empty();
     $('.card-arrow').hide();
     $('.card-arrow').removeClass('card-arrow--bounce');
-    showText(".card-text", i, j, 0, 100); 
+    showText(".card-text", i, j, 0, 80); 
 }
 
 const clickCardClose = () =>{
@@ -27,7 +28,8 @@ const clickCardClose = () =>{
         i = i + 1;
         j = 0;
         initTween(i);
-        setTimeout(function(){newPositionSmoke(false)}, 500);
+        // hideHoloForMovement();
+        setTimeout(function(){ hideHoloForMovement() }, 500);
     }
 }
 
@@ -42,7 +44,7 @@ const clickUiInformation = () => {
         $('.ui-information-wrapper').removeClass('ui-information--bounce');
         $('.ui-information-wrapper').hide();
         setTimeout(function () { $('.card-wrapper, .card').show() }, 200);
-        setTimeout(function () {showText(".card-text", i, j, 0, 100)}, 700);    
+        setTimeout(function () {showText(".card-text", i, j, 0, 80)}, 700);    
     })
 }
 

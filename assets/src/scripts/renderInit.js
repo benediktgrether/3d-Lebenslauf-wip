@@ -1,7 +1,7 @@
 import { nav, cv }  from "./main";
-import { startingSmokeAnimation, newPositionSmoke } from './smoke';
 import { moveToNewLocation, moveToLocation, tweenUpdate } from "./tweenObject";
 import { objectLoad, objectByName, RESOURCES_LOADED } from "./objectLoad";
+import {setShowHoloTimeout, startingHolo, showInformationForHolo} from "./holoFrame";
 // import { tweenUpdate } from "./lunarLanding";
 
 var camera, scene, renderer;
@@ -12,8 +12,6 @@ var d = 2.5;
 
 var isControlEnable = false;
 
-var smoke = [];
-var renderSmoke = true;
 // var positionSmoke = false;
 // var showModel = true;
 
@@ -190,10 +188,10 @@ function renderInit() {
             }
 
             if (cv == true) {
-                if (renderSmoke == true) {
-                    startingSmokeAnimation(objectByName, renderSmoke);
-                }
-
+                
+                // if(startingHolo == false){
+                //     setTimeout(function(){setShowHoloTimeout()},2000);
+                // }
 
                 if (moveToLocation == true) {
                     moveToNewLocation(true);
@@ -288,9 +286,7 @@ export {
     startingSmokeAnimation,
     newPositionSmoke,
     showInformation,
-    smoke,
     camera,
     scene,
     objectByName,
-    renderSmoke
 };

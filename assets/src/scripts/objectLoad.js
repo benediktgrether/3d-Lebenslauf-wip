@@ -1,5 +1,6 @@
 import { scene, smoke } from "./renderInit";
 import { lunarLandingAnimation } from "./tweenObject";
+import { showInformationForHolo} from "./holoFrame";
 
 var models = {
     lunar: {
@@ -46,6 +47,16 @@ var models = {
     smoke: {
         glb: "assets/dist/object/smoke/smoke.glb",
         name: "smoke",
+        mesh: null
+    },
+    holopod: {
+        glb: "assets/dist/object/holopod/holopod.glb",
+        name: "holopod",
+        mesh: null
+    },
+    charHolo: {
+        glb: "assets/dist/object/char/char_holo_03.glb",
+        name: "charHolo",
         mesh: null
     }
 };
@@ -132,6 +143,10 @@ function loadCV() {
     meshes["smoke03"] = models.smoke.mesh.clone();
     meshes["smoke04"] = models.smoke.mesh.clone();
 
+
+    meshes["holopod"] = models.holopod.mesh.clone();
+    meshes["charHolo"] = models.charHolo.mesh.clone();
+
     meshes["friTree01"].position.set(0.5, 0, 2);
     meshes["friTree02"].position.set(-0.5, 0, 1.5);
     meshes["friTree03"].position.set(3, 0, 1.5);
@@ -164,24 +179,17 @@ function loadCV() {
     meshes["home"].position.set(1, 0.05, -3);
     meshes["home"].scale.set(2, 2, 2);
 
-    meshes["char"].position.set(0.8, 0.17, -0.8);
+    meshes["char"].position.set(0.8, 0.25, -0.8);
     meshes["char"].rotation.y = -Math.PI / 2;
 
-    // meshes["smoke00"].position.set(0.8, 0.5, -0.8);
-    meshes["smoke00"].position.set(0.8, -2.5 + 1.5, -0.8);
-    meshes["smoke00"].scale.set(0.5, 0.5, 0.5);
+    meshes["charHolo"].position.set(0.8, 0.25, -0.79);
+    meshes["charHolo"].scale.set(1.5, 1.25, 1.5);
+    meshes["charHolo"].rotation.y = -Math.PI / 2;
 
-    meshes["smoke01"].position.set(0.8, -2.5 + 1.7, -1);
-    meshes["smoke01"].scale.set(0.45, 0.45, 0.45);
+    meshes["holopod"].scale.set(0.25, 0.25, 0.25);
+    meshes["holopod"].position.set(0.8, 0.2, -0.8);
 
-    meshes["smoke02"].position.set(0.8, -2.5 + 1.8, -0.5);
-    meshes["smoke02"].scale.set(0.3, 0.3, 0.3);
 
-    meshes["smoke03"].position.set(0.8, -2.5 + 2, -0.8);
-    meshes["smoke03"].scale.set(0.25, 0.25, 0.25);
-
-    meshes["smoke04"].position.set(0.7, -2.5 + 2.2, -0.9);
-    meshes["smoke04"].scale.set(0.2, 0.2, 0.2);
 
     meshes["lunar"].position.set(0.8, 2, -0.8)
 
@@ -203,6 +211,8 @@ function loadCV() {
     scene.add(meshes["street10"]);
     scene.add(meshes["home"]);
     scene.add(meshes["char"]);
+    scene.add(meshes["charHolo"]);
+    scene.add(meshes["holopod"]);
     scene.add(meshes["gras01"]);
     scene.add(meshes["gras02"]);
     scene.add(meshes["gras03"]);
@@ -210,22 +220,12 @@ function loadCV() {
     scene.add(meshes["gras05"]);
     scene.add(meshes["gras06"]);
 
-    scene.add(meshes["smoke00"]);
-    scene.add(meshes["smoke01"]);
-    scene.add(meshes["smoke02"]);
-    scene.add(meshes["smoke03"]);
-    scene.add(meshes["smoke04"]);
-
-
-    for (let index = 0; index < 5; index++) {
-        smoke[index] = meshes["smoke0" + [index]];
-
-    }
-
     objectByName = meshes["char"];
     objectByName.visible = false;
+    meshes["charHolo"].visible = false;
 
     console.log(objectByName.position);
+    showInformationForHolo();
 
 }
 

@@ -79,9 +79,9 @@ function renderInit() {
     var hemiLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
     scene.add(hemiLight);
 
-    // var helper = new THREE.HemisphereLightHelper(hemiLight, 5);
+    var helper = new THREE.HemisphereLightHelper(hemiLight, 5);
 
-    // scene.add(helper);
+    scene.add(helper);
 
     //#endregion
 
@@ -103,8 +103,8 @@ function renderInit() {
     scene.add(spotLight);
 
     //Create a helper for the shadow camera (optional)
-    // var helper = new THREE.CameraHelper(spotLight.shadow.camera);
-    // scene.add(helper);
+    var helper = new THREE.CameraHelper(spotLight.shadow.camera);
+    scene.add(helper);
     //#enregion
 
     //#region Plane Ground
@@ -199,6 +199,11 @@ function renderInit() {
                 }
                 camera.lookAt(objectByName.position);
                 spotLight.position.set(3 + objectByName.position.x, 14, 12 + objectByName.position.z);
+                spotLight.target.position.set(objectByName.position.x, objectByName.position.y, objectByName.position.z);
+                spotLight.target.lookAt(camera);
+
+                spotLight.target.updateMatrix();
+                spotLight.target.updateMatrixWorld();   
             }
             if (tweenUpdate == true) {
                 TWEEN.update();

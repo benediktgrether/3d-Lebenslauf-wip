@@ -58,6 +58,11 @@ var models = {
         glb: "assets/dist/object/char/char_holo_03.glb",
         name: "charHolo",
         mesh: null
+    },
+    fes: {
+        glb:"assets/dist/object/building/fes.glb",
+        name: "fes",
+        mesh: null
     }
 };
 
@@ -136,15 +141,18 @@ function loadCV() {
     meshes["gras04"] = models.gras.mesh.clone();
     meshes["gras05"] = models.gras.mesh.clone();
     meshes["gras06"] = models.gras.mesh.clone();
-
-    meshes["smoke00"] = models.smoke.mesh.clone();
-    meshes["smoke01"] = models.smoke.mesh.clone();
-    meshes["smoke02"] = models.smoke.mesh.clone();
-    meshes["smoke03"] = models.smoke.mesh.clone();
-    meshes["smoke04"] = models.smoke.mesh.clone();
+    meshes["fes"] = models.fes.mesh.clone();
 
 
-    meshes["holopod"] = models.holopod.mesh.clone();
+    meshes["holopod00"] = models.holopod.mesh.clone();
+    meshes["holopod01"] = models.holopod.mesh.clone();
+    meshes["holopod02"] = models.holopod.mesh.clone();
+    meshes["holopod03"] = models.holopod.mesh.clone();
+    meshes["holopod04"] = models.holopod.mesh.clone();
+    meshes["holopod05"] = models.holopod.mesh.clone();
+    meshes["holopod06"] = models.holopod.mesh.clone();
+    // meshes["holopod07"] = models.holopod.mesh.clone();
+    
     meshes["charHolo"] = models.charHolo.mesh.clone();
 
     meshes["friTree01"].position.set(0.5, 0, 2);
@@ -178,6 +186,9 @@ function loadCV() {
 
     meshes["home"].position.set(1, 0.05, -3);
     meshes["home"].scale.set(2, 2, 2);
+    
+    meshes["fes"].position.set(10, 1, -4)
+    // meshes["fes"].scale.set(2, 2, 2);
 
     meshes["char"].position.set(0.8, 0.25, -0.8);
     meshes["char"].rotation.y = -Math.PI / 2;
@@ -186,13 +197,23 @@ function loadCV() {
     meshes["charHolo"].scale.set(1.5, 1.25, 1.5);
     meshes["charHolo"].rotation.y = -Math.PI / 2;
 
-    meshes["holopod"].scale.set(0.25, 0.25, 0.25);
-    meshes["holopod"].position.set(0.8, 0.2, -0.8);
-
-
-
-    meshes["lunar"].position.set(0.8, 2, -0.8)
-
+    meshes["holopod00"].scale.set(0.25, 0.25, 0.25);
+    meshes["holopod00"].position.set(0.8, 0.2, -0.8);
+    
+    meshes["holopod01"].scale.set(0.25, 0.25, 0.25);
+    meshes["holopod02"].scale.set(0.25, 0.25, 0.25);
+    meshes["holopod03"].scale.set(0.25, 0.25, 0.25);
+    meshes["holopod04"].scale.set(0.25, 0.25, 0.25);
+    meshes["holopod05"].scale.set(0.25, 0.25, 0.25);
+    meshes["holopod06"].scale.set(0.25, 0.25, 0.25);
+    
+    meshes["holopod01"].position.set(10, 0.2, -0.8);
+    meshes["holopod02"].position.set(20, 0.2, -0.8);
+    meshes["holopod03"].position.set(30, 0.2, -0.8);
+    meshes["holopod04"].position.set(40, 0.2, -0.8);
+    meshes["holopod05"].position.set(50, 0.2, -0.8);
+    meshes["holopod06"].position.set(60, 0.2, -0.8);
+    
     scene.add(meshes["friTree01"]);
     scene.add(meshes["friTree02"]);
     scene.add(meshes["friTree03"]);
@@ -210,15 +231,24 @@ function loadCV() {
     scene.add(meshes["street09"]);
     scene.add(meshes["street10"]);
     scene.add(meshes["home"]);
+    scene.add(meshes["fes"]);
     scene.add(meshes["char"]);
     scene.add(meshes["charHolo"]);
-    scene.add(meshes["holopod"]);
+    scene.add(meshes["holopod00"]);
+
     scene.add(meshes["gras01"]);
     scene.add(meshes["gras02"]);
     scene.add(meshes["gras03"]);
     scene.add(meshes["gras04"]);
     scene.add(meshes["gras05"]);
     scene.add(meshes["gras06"]);
+
+    scene.add(meshes["holopod01"]);
+    scene.add(meshes["holopod02"]);
+    scene.add(meshes["holopod03"]);
+    scene.add(meshes["holopod04"]);
+    scene.add(meshes["holopod05"]);
+    scene.add(meshes["holopod06"]);
 
     objectByName = meshes["char"];
     objectByName.visible = false;

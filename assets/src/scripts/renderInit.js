@@ -8,7 +8,7 @@ var camera, scene, renderer;
 var controls;
 var aspect = window.innerWidth / window.innerHeight;
 var d = 2.5;
-// const gui = new dat.GUI();
+const gui = new dat.GUI();
 
 var isControlEnable = false;
 
@@ -132,11 +132,11 @@ function renderInit() {
 
     //#region Light UI
 
-    // var light = gui.addFolder('spotLight');
-    // light.add(spotLight.position, 'x', 0, 100);
-    // light.add(spotLight.position, 'y', 0, 100);
-    // light.add(spotLight.position, 'z', 0, 100);
-    // // light.open();
+    var light = gui.addFolder('spotLight');
+    light.add(spotLight.position, 'x', 0, 100);
+    light.add(spotLight.position, 'y', 0, 100);
+    light.add(spotLight.position, 'z', 0, 100);
+    // light.open();
 
     // var cameraGui = gui.addFolder('camera');
     // cameraGui.add(camera.position, 'x', 0, 50);

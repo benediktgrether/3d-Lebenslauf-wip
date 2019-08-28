@@ -88,6 +88,11 @@ var models = {
         glb:"assets/dist/object/db/track/track.glb",
         name: "track",
         mesh: null
+    },
+    br185: {
+        glb:"assets/dist/object/db/br185/br185.glb",
+        name: "br185",
+        mesh: null
     }
 };
 
@@ -168,6 +173,7 @@ function loadCV() {
     meshes["gras06"] = models.gras.mesh.clone();
     meshes["fes"] = models.fes.mesh.clone();
     meshes["br294"] = models.br294.mesh.clone();
+    meshes["br185"] = models.br185.mesh.clone();
     meshes["vehicle01"] = models.vehicle01.mesh.clone();
     meshes["vehicle02"] = models.vehicle02.mesh.clone();
     meshes["vehicle03"] = models.vehicle03.mesh.clone();
@@ -175,6 +181,9 @@ function loadCV() {
     meshes["track02"] = models.track.mesh.clone();
     meshes["track03"] = models.track.mesh.clone();
     meshes["track04"] = models.track.mesh.clone();
+    meshes["track05"] = models.track.mesh.clone();
+    meshes["track06"] = models.track.mesh.clone();
+    meshes["track07"] = models.track.mesh.clone();
 
 
     meshes["holopod00"] = models.holopod.mesh.clone();
@@ -231,6 +240,9 @@ function loadCV() {
     
     meshes["vehicle03"].position.set(27.95, 1, -2)
     meshes["vehicle03"].scale.set(0.25, 0.25, 0.25)
+
+    meshes["br185"].position.set(30.72, 1, -2)
+    meshes["br185"].scale.set(0.25, 0.25, 0.25)
     
     meshes["track01"].position.set(20, 1, -2)
     meshes["track01"].scale.set(0.25, 0.25, 0.25)
@@ -243,6 +255,14 @@ function loadCV() {
     
     meshes["track04"].position.set(29, 1, -2)
     meshes["track04"].scale.set(0.25, 0.25, 0.25)
+    
+    meshes["track05"].position.set(32, 1, -2)
+    meshes["track05"].scale.set(0.25, 0.25, 0.25)
+    meshes["track06"].position.set(35, 1, -2)
+    meshes["track06"].scale.set(0.25, 0.25, 0.25)
+    meshes["track07"].position.set(38, 1, -2)
+    meshes["track07"].scale.set(0.25, 0.25, 0.25)
+
     // meshes["fes"].scale.set(2, 2, 2);
 
     meshes["char"].position.set(0.8, 0.25, -0.8);
@@ -305,6 +325,7 @@ function loadCV() {
     scene.add(meshes["holopod05"]);
     scene.add(meshes["holopod06"]);
     scene.add(meshes["br294"]);
+    scene.add(meshes["br185"]);
     scene.add(meshes["vehicle01"]);
     scene.add(meshes["vehicle02"]);
     scene.add(meshes["vehicle03"]);
@@ -312,6 +333,9 @@ function loadCV() {
     scene.add(meshes["track02"]);
     scene.add(meshes["track03"]);
     scene.add(meshes["track04"]);
+    scene.add(meshes["track05"]);
+    scene.add(meshes["track06"]);
+    scene.add(meshes["track07"]);
 
     objectByName = meshes["char"];
     objectByName.visible = false;

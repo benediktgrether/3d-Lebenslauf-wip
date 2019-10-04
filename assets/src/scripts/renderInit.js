@@ -1,7 +1,11 @@
-import { nav, cv }  from "./main";
+import { nav, cv } from "./main";
 import { moveToNewLocation, moveToLocation, tweenUpdate } from "./tweenObject";
 import { objectLoad, objectByName, RESOURCES_LOADED } from "./objectLoad";
-import {setShowHoloTimeout, startingHolo, showInformationForHolo} from "./holoFrame";
+import {
+  setShowHoloTimeout,
+  startingHolo,
+  showInformationForHolo
+} from "./holoFrame";
 // import { tweenUpdate } from "./lunarLanding";
 
 var camera, scene, renderer;
@@ -14,7 +18,6 @@ var isControlEnable = false;
 
 // var positionSmoke = false;
 // var showModel = true;
-
 
 var keyboard = {};
 
@@ -30,268 +33,280 @@ clock = new THREE.Clock();
 //#region Loading Screen
 
 var loadingScreen = {
-    scene: new THREE.Scene(),
-    camera: new THREE.PerspectiveCamera(90, aspect, 0.1, 100),
-    box: new THREE.Mesh(
-        new THREE.BoxGeometry(0.5, 0.5, 0.5),
-        new THREE.MeshBasicMaterial({ color: 0x4444ff })
-    )
+  scene: new THREE.Scene(),
+  camera: new THREE.PerspectiveCamera(90, aspect, 0.1, 100),
+  box: new THREE.Mesh(
+    new THREE.BoxGeometry(0.5, 0.5, 0.5),
+    new THREE.MeshBasicMaterial({ color: 0x4444ff })
+  )
 };
 
 //#endregion
 
 function renderInit() {
-    scene = new THREE.Scene();
+  scene = new THREE.Scene();
 
-    //#region Isometric Camera
-    camera = new THREE.OrthographicCamera(- d * aspect, d * aspect, d, -d, 1, 1000);
+  //#region Isometric Camera
+  camera = new THREE.OrthographicCamera(
+    -d * aspect,
+    d * aspect,
+    d,
+    -d,
+    1,
+    1000
+  );
 
-    // camera = new THREE.OrthographicCamera(- d * aspect, d * aspect, d, - d, 1, 1000);
+  // camera = new THREE.OrthographicCamera(- d * aspect, d * aspect, d, - d, 1, 1000);
 
-    camera.position.set(20.8, 20, 20 - 0.8); // all components equal
-    camera.lookAt(scene.position); // or the origin
+  camera.position.set(20.8, 20, 20 - 0.8); // all components equal
+  camera.lookAt(scene.position); // or the origin
 
-    window.addEventListener('resize', onWindowResize, false);
-    //#endregion
+  window.addEventListener("resize", onWindowResize, false);
+  //#endregion
 
-    //#region Loading Screen
-    loadingScreen.box.position.set(0, 0, 5);
-    loadingScreen.camera.lookAt(loadingScreen.box.position);
-    loadingScreen.scene.add(loadingScreen.box);
+  //#region Loading Screen
+  loadingScreen.box.position.set(0, 0, 5);
+  loadingScreen.camera.lookAt(loadingScreen.box.position);
+  loadingScreen.scene.add(loadingScreen.box);
 
-    objectLoad();
-    //#endregion
+  objectLoad();
+  //#endregion
 
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0xc7e1ff);
+  document.body.appendChild(renderer.domElement);
 
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xc7e1ff);
-    document.body.appendChild(renderer.domElement);
+  renderer.gammaOutput = true;
+  renderer.gammaFactor = 2.0;
 
-    renderer.gammaOutput = true;
-    renderer.gammaFactor = 2.0;
+  renderer.shadowMapEnabled = true;
+  renderer.shadowMapSoft = true;
+  renderer.shadowMap.renderSingleSided = false; // default is true
 
-    renderer.shadowMapEnabled = true;
-    renderer.shadowMapSoft = true;
-    renderer.shadowMap.renderSingleSided = false; // default is true
+  //#region HemiLight
+  var hemiLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+  scene.add(hemiLight);
 
-    //#region HemiLight
-    var hemiLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-    scene.add(hemiLight);
+  // var helper = new THREE.HemisphereLightHelper(hemiLight, 5);
 
-    var helper = new THREE.HemisphereLightHelper(hemiLight, 5);
+  // scene.add(helper);
 
-    scene.add(helper);
+  //#endregion
 
-    //#endregion
+  // var axesHelper = new THREE.AxesHelper(2);
+  // scene.add(axesHelper);
 
-    // var axesHelper = new THREE.AxesHelper(2);
-    // scene.add(axesHelper);
+  //#region spotLight
+  var spotLight = new THREE.SpotLight(0xffffff);
+  spotLight.position.set(3, 14, 12);
+  spotLight.intensity = 5;
+  spotLight.castShadow = true;
+  // spotLight.shadow.radius = 4;
 
-    //#region spotLight
-    var spotLight = new THREE.SpotLight(0xffffff);
-    spotLight.position.set(3, 14, 12);
-    spotLight.intensity = 5;
-    spotLight.castShadow = true;
-    // spotLight.shadow.radius = 4;
+  spotLight.shadowMapWidth = 2048;
+  spotLight.shadowMapHeight = 2048;
+  spotLight.shadowCameraNear = 1;
+  spotLight.shadowCameraFar = 4000;
+  spotLight.shadowCameraFov = 45;
+  scene.add(spotLight);
 
-    spotLight.shadowMapWidth = 2048;
-    spotLight.shadowMapHeight = 2048;
-    spotLight.shadowCameraNear = 1;
-    spotLight.shadowCameraFar = 4000;
-    spotLight.shadowCameraFov = 45;
-    scene.add(spotLight);
+  //Create a helper for the shadow camera (optional)
+  // var helper = new THREE.CameraHelper(spotLight.shadow.camera);
+  // scene.add(helper);
+  //#enregion
 
-    //Create a helper for the shadow camera (optional)
-    var helper = new THREE.CameraHelper(spotLight.shadow.camera);
-    scene.add(helper);
-    //#enregion
+  //#region Plane Ground
+  // var geometry = new THREE.PlaneGeometry(20, 20, 20);
+  // var material = new THREE.MeshBasicMaterial({ color: 0x25781f, side: THREE.DoubleSide });
+  // var planeGround = new THREE.Mesh(geometry, material);
+  // planeGround.rotation.x = -Math.PI / 2;
+  // planeGround.name = "plane";
+  // scene.add(planeGround);
 
-    //#region Plane Ground
-    // var geometry = new THREE.PlaneGeometry(20, 20, 20);
-    // var material = new THREE.MeshBasicMaterial({ color: 0x25781f, side: THREE.DoubleSide });
-    // var planeGround = new THREE.Mesh(geometry, material);
-    // planeGround.rotation.x = -Math.PI / 2;
-    // planeGround.name = "plane";
-    // scene.add(planeGround);
+  //Shadow for Plane Material
+  var planeGeometry = new THREE.PlaneGeometry(2000, 2000);
+  planeGeometry.rotateX(-Math.PI / 2);
 
+  var planeMaterial = new THREE.ShadowMaterial();
+  planeMaterial.opacity = 0.2;
 
-    //Shadow for Plane Material
-    var planeGeometry = new THREE.PlaneGeometry(2000, 2000);
-    planeGeometry.rotateX(- Math.PI / 2);
+  var planeShadow = new THREE.Mesh(planeGeometry, planeMaterial);
+  planeShadow.receiveShadow = true;
+  planeShadow.position.y = 0.1;
+  scene.add(planeShadow);
 
-    var planeMaterial = new THREE.ShadowMaterial();
-    planeMaterial.opacity = 0.2;
+  //#endregion
 
-    var planeShadow = new THREE.Mesh(planeGeometry, planeMaterial);
-    planeShadow.receiveShadow = true;
-    planeShadow.position.y = 0.1;
-    scene.add(planeShadow);
+  //#region Light UI
 
-    //#endregion
+  var light = gui.addFolder("spotLight");
+  light.add(spotLight.position, "x", 0, 100);
+  light.add(spotLight.position, "y", 0, 100);
+  light.add(spotLight.position, "z", 0, 100);
+  // light.open();
 
-    //#region Light UI
+  // var cameraGui = gui.addFolder('camera');
+  // cameraGui.add(camera.position, 'x', 0, 50);
+  // cameraGui.add(camera.position, 'y', 0, 50);
+  // cameraGui.add(camera.position, 'z', 0, 50);
 
-    var light = gui.addFolder('spotLight');
-    light.add(spotLight.position, 'x', 0, 100);
-    light.add(spotLight.position, 'y', 0, 100);
-    light.add(spotLight.position, 'z', 0, 100);
-    // light.open();
+  // var settings = {
+  //     'enable Controls': false
+  // };
+  // var folder1 = gui.addFolder('enableControls');
+  // folder1.add(settings, 'enable Controls').onChange(setEnableControls);
+  // folder1.open();
 
-    // var cameraGui = gui.addFolder('camera');
-    // cameraGui.add(camera.position, 'x', 0, 50);
-    // cameraGui.add(camera.position, 'y', 0, 50);
-    // cameraGui.add(camera.position, 'z', 0, 50);
+  // function setEnableControls(enableControls) {
+  //     // enableControls = enableControls;
+  //     isControlEnable = enableControls;
+  //     if (isControlEnable == true) {
+  //         controls = new THREE.OrbitControls(camera, renderer.domElement);
+  //         controls.update();
+  //     }
+  // }
 
+  //#region Controls
 
-    // var settings = {
-    //     'enable Controls': false
-    // };
-    // var folder1 = gui.addFolder('enableControls');
-    // folder1.add(settings, 'enable Controls').onChange(setEnableControls);
-    // folder1.open();
+  var controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.update();
 
-    // function setEnableControls(enableControls) {
-    //     // enableControls = enableControls;
-    //     isControlEnable = enableControls;
-    //     if (isControlEnable == true) {
-    //         controls = new THREE.OrbitControls(camera, renderer.domElement);
-    //         controls.update();
-    //     }
-    // }
+  //# endregion
 
-    //#region Controls
+  var animate = function() {
+    if (RESOURCES_LOADED == false) {
+      requestAnimationFrame(animate);
 
-    var controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.update();
+      renderer.render(loadingScreen.scene, loadingScreen.camera);
+      return;
+    }
 
-    //# endregion
+    if (nav == false) {
+      var delta = clock.getDelta();
+      charMovement(delta);
 
-    var animate = function () {
+      renderer.render(scene, camera);
 
-        if (RESOURCES_LOADED == false) {
-            requestAnimationFrame(animate);
+      //   if (isControlEnable == true) {
+      //     controls.update();
+      //     // TWEEN.update();
+      //   }
 
-            renderer.render(loadingScreen.scene, loadingScreen.camera)
-            return;
+      if (cv == true) {
+        // if(startingHolo == false){
+        //     setTimeout(function(){setShowHoloTimeout()},2000);
+        // }
+        controls.update();
+        if (moveToLocation == true) {
+          moveToNewLocation(true);
+          // TWEEN.update();
         }
+        camera.lookAt(objectByName.position);
+        spotLight.position.set(
+          3 + objectByName.position.x,
+          14,
+          12 + objectByName.position.z
+        );
+        spotLight.target.position.set(
+          objectByName.position.x,
+          objectByName.position.y,
+          objectByName.position.z
+        );
+        spotLight.target.lookAt(camera);
 
-        if (nav == false) {
-            var delta = clock.getDelta();
-            charMovement(delta);
-
-            renderer.render(scene, camera);
-
-            if (isControlEnable == true) {
-                controls.update();
-                // TWEEN.update();
-            }
-
-            if (cv == true) {
-                
-                // if(startingHolo == false){
-                //     setTimeout(function(){setShowHoloTimeout()},2000);
-                // }
-
-                if (moveToLocation == true) {
-                    moveToNewLocation(true);
-                    // TWEEN.update();
-                }
-                camera.lookAt(objectByName.position);
-                spotLight.position.set(3 + objectByName.position.x, 14, 12 + objectByName.position.z);
-                spotLight.target.position.set(objectByName.position.x, objectByName.position.y, objectByName.position.z);
-                spotLight.target.lookAt(camera);
-
-                spotLight.target.updateMatrix();
-                spotLight.target.updateMatrixWorld();   
-            }
-            if (tweenUpdate == true) {
-                TWEEN.update();
-            }
-            // TWEEN.update();
-            // camera.lookAt(objectByName.position);
-            requestAnimationFrame(function () {
-                animate(renderer, scene, camera);
-            });
-        }
-    };
-    animate();
+        spotLight.target.updateMatrix();
+        spotLight.target.updateMatrixWorld();
+      }
+      if (tweenUpdate == true) {
+        TWEEN.update();
+      }
+      // TWEEN.update();
+      // camera.lookAt(objectByName.position);
+      requestAnimationFrame(function() {
+        animate(renderer, scene, camera);
+      });
+    }
+  };
+  animate();
 }
 
-
 function showInformation() {
-    $('.ui-information-wrapper').css({ 'display': 'flex' });
-    $('.ui-information-wrapper').addClass('ui-information--bounce');
+  $(".ui-information-wrapper").css({ display: "flex" });
+  $(".ui-information-wrapper").addClass("ui-information--bounce");
 }
 
 function onWindowResize() {
+  var aspect = window.innerWidth / window.innerHeight;
 
-    var aspect = window.innerWidth / window.innerHeight;
+  camera.left = -d * aspect;
+  camera.right = d * aspect;
+  camera.top = d;
+  camera.bottom = -d;
 
-    camera.left = - d * aspect;
-    camera.right = d * aspect;
-    camera.top = d;
-    camera.bottom = - d;
-
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function charMovement(delta) {
-    playerVelocity.x -= playerVelocity.x * 10.0 * delta;
-    playerVelocity.z -= playerVelocity.z * 10.0 * delta;
-    playerVelocity.y -= playerVelocity.y * 10.0 * delta;
+  playerVelocity.x -= playerVelocity.x * 10.0 * delta;
+  playerVelocity.z -= playerVelocity.z * 10.0 * delta;
+  playerVelocity.y -= playerVelocity.y * 10.0 * delta;
 
-    if (keyboard[87] || keyboard[38] || keyboard[83] || keyboard[40] || keyboard[37] || keyboard[39]) {
-        if (keyboard[87] || keyboard[38]) {
-            playerVelocity.x += PLAYERSPEED * delta;
-            // console.log(objectByName.position);
-        }
-        if (keyboard[83] || keyboard[40]) {
-            playerVelocity.x -= PLAYERSPEED * delta;
-        }
-
-        if (keyboard[37]) {
-            objectByName.rotation.y += Math.PI * 0.01;
-        }
-        if (keyboard[39]) {
-            objectByName.rotation.y -= Math.PI * 0.01;
-        }
-        // console.log(camera.translateX)
-        objectByName.translateX(playerVelocity.x * delta);
-        objectByName.translateZ(playerVelocity.z * delta);
-
-        // #region Camera
-        camera.position.x = 20 + objectByName.position.x;
-        camera.position.z = 20 + objectByName.position.z;
-        camera.updateProjectionMatrix();
-    } else {
-        // Collision or no movement key being pressed. Stop movememnt
-        playerVelocity.x = 0;
-        playerVelocity.z = 0;
+  if (
+    keyboard[87] ||
+    keyboard[38] ||
+    keyboard[83] ||
+    keyboard[40] ||
+    keyboard[37] ||
+    keyboard[39]
+  ) {
+    if (keyboard[87] || keyboard[38]) {
+      playerVelocity.x += PLAYERSPEED * delta;
+      // console.log(objectByName.position);
     }
+    if (keyboard[83] || keyboard[40]) {
+      playerVelocity.x -= PLAYERSPEED * delta;
+    }
+
+    if (keyboard[37]) {
+      objectByName.rotation.y += Math.PI * 0.01;
+    }
+    if (keyboard[39]) {
+      objectByName.rotation.y -= Math.PI * 0.01;
+    }
+    // console.log(camera.translateX)
+    objectByName.translateX(playerVelocity.x * delta);
+    objectByName.translateZ(playerVelocity.z * delta);
+
+    // #region Camera
+    camera.position.x = 20 + objectByName.position.x;
+    camera.position.z = 20 + objectByName.position.z;
+    camera.updateProjectionMatrix();
+  } else {
+    // Collision or no movement key being pressed. Stop movememnt
+    playerVelocity.x = 0;
+    playerVelocity.z = 0;
+  }
 }
 
 function keyDown(event) {
-    keyboard[event.keyCode] = true;
+  keyboard[event.keyCode] = true;
 }
 
 function keyUp(event) {
-    keyboard[event.keyCode] = false;
+  keyboard[event.keyCode] = false;
 }
 
-window.addEventListener('keydown', keyDown);
-window.addEventListener('keyup', keyUp);
-
-
+window.addEventListener("keydown", keyDown);
+window.addEventListener("keyup", keyUp);
 
 export {
-    renderInit,
-    startingSmokeAnimation,
-    newPositionSmoke,
-    showInformation,
-    camera,
-    scene,
-    objectByName,
+  renderInit,
+  startingSmokeAnimation,
+  newPositionSmoke,
+  showInformation,
+  camera,
+  scene,
+  objectByName
 };

@@ -1,4 +1,4 @@
-import { nav, cv } from "./main";
+import { nav, cv, hobby } from "./main";
 import { moveToNewLocation, moveToLocation, tweenUpdate } from "./tweenObject";
 import { objectLoad, objectByName, RESOURCES_LOADED } from "./objectLoad";
 import {
@@ -197,7 +197,7 @@ function renderInit() {
         // if(startingHolo == false){
         //     setTimeout(function(){setShowHoloTimeout()},2000);
         // }
-        controls.update();
+        // controls.update();
         if (moveToLocation == true) {
           moveToNewLocation(true);
           // TWEEN.update();
@@ -217,6 +217,17 @@ function renderInit() {
 
         spotLight.target.updateMatrix();
         spotLight.target.updateMatrixWorld();
+      }
+
+      if (hobby == true) {
+        camera.position.set(20.8, 20, 20 - 0.8); // all components equal
+        camera.lookAt(scene.position); // or the origin
+        spotLight.position.set(3, 14, 12);
+        spotLight.target.lookAt(camera);
+
+        spotLight.target.updateMatrix();
+        spotLight.target.updateMatrixWorld();
+        console.log(spotLight.position);
       }
       if (tweenUpdate == true) {
         TWEEN.update();

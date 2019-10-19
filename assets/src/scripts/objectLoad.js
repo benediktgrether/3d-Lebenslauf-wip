@@ -4,99 +4,129 @@ import { showInformationForHolo } from "./holoFrame";
 
 var models = {
   lunar: {
-    glb: "assets/dist/object/lunar/lunar.glb",
+    glb: "./assets/dist/object/lunar/lunar.glb",
     name: "lunar",
     mesh: null
   },
   lunarSurface: {
-    glb: "assets/dist/object/lunarsurface/moonSurface.glb",
+    glb: "./assets/dist/object/lunarsurface/moonSurface.glb",
     name: "lunar_surface",
     mesh: null
   },
   friTree: {
-    glb: "assets/dist/object/tree/fri/friTree.glb",
+    glb: "./assets/dist/object/tree/fri/friTree.glb",
     name: "fri_tree",
     mesh: null
   },
   LowTree: {
-    glb: "assets/dist/object/tree/low-poly-tree/lowPolyTree.glb",
+    glb: "./assets/dist/object/tree/low-poly-tree/lowPolyTree.glb",
     name: "low_tree",
     mesh: null
   },
   street: {
-    glb: "assets/dist/object/street/street.glb",
+    glb: "./assets/dist/object/street/street.glb",
     name: "street",
     mesh: null
   },
 
   home: {
-    glb: "assets/dist/object/building/home.glb",
+    glb: "./assets/dist/object/building/home.glb",
     name: "home",
     mesh: null
   },
   char: {
-    glb: "assets/dist/object/char/char.glb",
+    glb: "./assets/dist/object/char/char.glb",
     name: "char",
     mesh: null
   },
   gras: {
-    glb: "assets/dist/object/enviroment/gras.glb",
+    glb: "./assets/dist/object/enviroment/gras.glb",
     name: "gras",
     mesh: null
   },
   smoke: {
-    glb: "assets/dist/object/smoke/smoke.glb",
+    glb: "./assets/dist/object/smoke/smoke.glb",
     name: "smoke",
     mesh: null
   },
   holopod: {
-    glb: "assets/dist/object/holopod/holopod.glb",
+    glb: "./assets/dist/object/holopod/holopod.glb",
     name: "holopod",
     mesh: null
   },
   charHolo: {
-    glb: "assets/dist/object/char/char_holo_03.glb",
+    glb: "./assets/dist/object/char/char_holo_03.glb",
     name: "charHolo",
     mesh: null
   },
   fes: {
-    glb: "assets/dist/object/building/fes.glb",
+    glb: "./assets/dist/object/building/fes.glb",
     name: "fes",
     mesh: null
   },
   br294: {
-    glb: "assets/dist/object/db/br294/br294.glb",
+    glb: "./assets/dist/object/db/br294/br294.glb",
     name: "br294",
     mesh: null
   },
   vehicle01: {
-    glb: "assets/dist/object/db/vehicle/frigth_vehicle_01.glb",
+    glb: "./assets/dist/object/db/vehicle/frigth_vehicle_01.glb",
     name: "vehicle01",
     mesh: null
   },
   vehicle02: {
-    glb: "assets/dist/object/db/vehicle/frigth_vehicle_02.glb",
+    glb: "./assets/dist/object/db/vehicle/frigth_vehicle_02.glb",
     name: "vehicle02",
     mesh: null
   },
   vehicle03: {
-    glb: "assets/dist/object/db/vehicle/frigth_vehicle_03.glb",
+    glb: "./assets/dist/object/db/vehicle/frigth_vehicle_03.glb",
     name: "vehicle03",
     mesh: null
   },
   track: {
-    glb: "assets/dist/object/db/track/track.glb",
+    glb: "./assets/dist/object/db/track/track.glb",
     name: "track",
     mesh: null
   },
   br185: {
-    glb: "assets/dist/object/db/br185/br185.glb",
+    glb: "./assets/dist/object/db/br185/br185.glb",
     name: "br185",
     mesh: null
   },
-  mountain: {
-    glb: "assets/dist/object/mountain/mountain.glb",
-    name: "mountain",
+  tschool: {
+    glb: "./assets/dist/object/building/tschool.glb",
+    name: "tschool",
+    mesh: null
+  },
+  afk: {
+    glb: "./assets/dist/object/building/afk.glb",
+    name: "afk",
+    mesh: null
+  },
+  hfu: {
+    glb: "./assets/dist/object/building/hfu.glb",
+    name: "hfu",
+    mesh: null
+  },
+  dslr: {
+    glb: "./assets/dist/object/hobby/camera/camera.glb",
+    name: "dslr",
+    mesh: null
+  },
+  gaming: {
+    glb: "./assets/dist/object/hobby/gaming/gaming.glb",
+    name: "gaming",
+    mesh: null
+  },
+  swimming: {
+    glb: "./assets/dist/object/hobby/swimming/rhy_swimming.glb",
+    name: "swimming",
+    mesh: null
+  },
+  snowboard: {
+    glb: "./assets/dist/object/hobby/snowboard/snowboard.glb",
+    name: "snowboard",
     mesh: null
   }
 };
@@ -150,12 +180,19 @@ function loadCV() {
   scene.remove(meshes["lunar"]);
   scene.remove(meshes["lunar_surface"]);
 
+  scene.remove(meshes["dslr01"]);
+  scene.remove(meshes["swimming"]);
+  scene.remove(meshes["gaming"]);
+  scene.remove(meshes["snowboard"]);
+
   meshes["friTree01"] = models.friTree.mesh.clone();
   meshes["friTree02"] = models.friTree.mesh.clone();
   meshes["friTree03"] = models.friTree.mesh.clone();
   meshes["friTree04"] = models.friTree.mesh.clone();
   meshes["lowTree01"] = models.LowTree.mesh.clone();
   meshes["lowTree02"] = models.LowTree.mesh.clone();
+
+  meshes["street00"] = models.street.mesh.clone();
   meshes["street01"] = models.street.mesh.clone();
   meshes["street02"] = models.street.mesh.clone();
   meshes["street03"] = models.street.mesh.clone();
@@ -166,6 +203,33 @@ function loadCV() {
   meshes["street08"] = models.street.mesh.clone();
   meshes["street09"] = models.street.mesh.clone();
   meshes["street10"] = models.street.mesh.clone();
+  meshes["street11"] = models.street.mesh.clone();
+  meshes["street12"] = models.street.mesh.clone();
+  meshes["street13"] = models.street.mesh.clone();
+  meshes["street14"] = models.street.mesh.clone();
+  meshes["street15"] = models.street.mesh.clone();
+  meshes["street16"] = models.street.mesh.clone();
+  meshes["street17"] = models.street.mesh.clone();
+  meshes["street18"] = models.street.mesh.clone();
+  meshes["street19"] = models.street.mesh.clone();
+  meshes["street20"] = models.street.mesh.clone();
+  meshes["street21"] = models.street.mesh.clone();
+  meshes["street22"] = models.street.mesh.clone();
+  meshes["street23"] = models.street.mesh.clone();
+  meshes["street24"] = models.street.mesh.clone();
+  meshes["street25"] = models.street.mesh.clone();
+  meshes["street26"] = models.street.mesh.clone();
+  meshes["street27"] = models.street.mesh.clone();
+  meshes["street28"] = models.street.mesh.clone();
+  meshes["street29"] = models.street.mesh.clone();
+  meshes["street30"] = models.street.mesh.clone();
+  meshes["street31"] = models.street.mesh.clone();
+  meshes["street32"] = models.street.mesh.clone();
+  meshes["street33"] = models.street.mesh.clone();
+  meshes["street34"] = models.street.mesh.clone();
+  meshes["street35"] = models.street.mesh.clone();
+  meshes["street36"] = models.street.mesh.clone();
+
   meshes["home"] = models.home.mesh.clone();
   meshes["char"] = models.char.mesh.clone();
   meshes["gras01"] = models.gras.mesh.clone();
@@ -188,7 +252,9 @@ function loadCV() {
   meshes["track06"] = models.track.mesh.clone();
   meshes["track07"] = models.track.mesh.clone();
 
-  meshes["mountain"] = models.mountain.mesh.clone();
+  meshes["tschool"] = models.tschool.mesh.clone();
+  meshes["afk"] = models.afk.mesh.clone();
+  meshes["hfu"] = models.hfu.mesh.clone();
 
   meshes["holopod00"] = models.holopod.mesh.clone();
   meshes["holopod01"] = models.holopod.mesh.clone();
@@ -212,6 +278,7 @@ function loadCV() {
   meshes["lowTree01"].scale.set(0.5, 0.5, 0.5);
   meshes["lowTree02"].scale.set(0.5, 0.5, 0.5);
 
+  meshes["street00"].position.set(-6, 0.1, 0);
   meshes["street01"].position.set(-4, 0.1, 0);
   meshes["street02"].position.set(-2, 0.1, 0);
   meshes["street03"].position.set(0, 0.1, 0);
@@ -222,6 +289,32 @@ function loadCV() {
   meshes["street08"].position.set(10, 0.1, 0);
   meshes["street09"].position.set(12, 0.1, 0);
   meshes["street10"].position.set(14, 0.1, 0);
+  meshes["street11"].position.set(16, 0.1, 0);
+  meshes["street12"].position.set(18, 0.1, 0);
+  meshes["street13"].position.set(20, 0.1, 0);
+  meshes["street14"].position.set(22, 0.1, 0);
+  meshes["street15"].position.set(24, 0.1, 0);
+  meshes["street16"].position.set(26, 0.1, 0);
+  meshes["street17"].position.set(28, 0.1, 0);
+  meshes["street18"].position.set(30, 0.1, 0);
+  meshes["street19"].position.set(32, 0.1, 0);
+  meshes["street20"].position.set(34, 0.1, 0);
+  meshes["street21"].position.set(36, 0.1, 0);
+  meshes["street22"].position.set(38, 0.1, 0);
+  meshes["street23"].position.set(40, 0.1, 0);
+  meshes["street24"].position.set(42, 0.1, 0);
+  meshes["street25"].position.set(44, 0.1, 0);
+  meshes["street26"].position.set(46, 0.1, 0);
+  meshes["street27"].position.set(48, 0.1, 0);
+  meshes["street28"].position.set(50, 0.1, 0);
+  meshes["street29"].position.set(52, 0.1, 0);
+  meshes["street30"].position.set(54, 0.1, 0);
+  meshes["street31"].position.set(56, 0.1, 0);
+  meshes["street32"].position.set(58, 0.1, 0);
+  meshes["street33"].position.set(60, 0.1, 0);
+  meshes["street34"].position.set(62, 0.1, 0);
+  meshes["street35"].position.set(64, 0.1, 0);
+  meshes["street36"].position.set(66, 0.1, 0);
 
   meshes["gras01"].position.set(-4, 0.1, 2);
   meshes["gras02"].position.set(-2, 0.1, 2);
@@ -276,15 +369,15 @@ function loadCV() {
   meshes["charHolo"].scale.set(1.5, 1.25, 1.5);
   meshes["charHolo"].rotation.y = -Math.PI / 2;
 
-  meshes["holopod00"].scale.set(0.25, 0.25, 0.25);
+  meshes["holopod00"].scale.set(0.15, 0.15, 0.15);
   meshes["holopod00"].position.set(0.8, 0.2, -0.8);
 
-  meshes["holopod01"].scale.set(0.25, 0.25, 0.25);
-  meshes["holopod02"].scale.set(0.25, 0.25, 0.25);
-  meshes["holopod03"].scale.set(0.25, 0.25, 0.25);
-  meshes["holopod04"].scale.set(0.25, 0.25, 0.25);
-  meshes["holopod05"].scale.set(0.25, 0.25, 0.25);
-  meshes["holopod06"].scale.set(0.25, 0.25, 0.25);
+  meshes["holopod01"].scale.set(0.15, 0.15, 0.15);
+  meshes["holopod02"].scale.set(0.15, 0.15, 0.15);
+  meshes["holopod03"].scale.set(0.15, 0.15, 0.15);
+  meshes["holopod04"].scale.set(0.15, 0.15, 0.15);
+  meshes["holopod05"].scale.set(0.15, 0.15, 0.15);
+  meshes["holopod06"].scale.set(0.15, 0.15, 0.15);
 
   meshes["holopod01"].position.set(10, 0.2, -0.8);
   meshes["holopod02"].position.set(20, 0.2, -0.8);
@@ -293,7 +386,14 @@ function loadCV() {
   meshes["holopod05"].position.set(50, 0.2, -0.8);
   meshes["holopod06"].position.set(60, 0.2, -0.8);
 
-  meshes["mountain"].position.set(35,0.25,0);
+  // To Do - Richtige Positionierung der Tschool und der HFU
+  meshes["tschool"].position.set(40, 0.2, -4);
+  meshes["tschool"].rotation.y = -Math.PI;
+  meshes["afk"].position.set(50, 0.2, -3);
+  meshes["afk"].rotation.y = -Math.PI / 2;
+  meshes["hfu"].position.set(60, 0.2, -3);
+  meshes["hfu"].rotation.y = -Math.PI / 2;
+  meshes["hfu"].scale.set(0.5, 0.5, 0.5);
 
   scene.add(meshes["friTree01"]);
   scene.add(meshes["friTree02"]);
@@ -301,6 +401,8 @@ function loadCV() {
   scene.add(meshes["friTree04"]);
   scene.add(meshes["lowTree01"]);
   scene.add(meshes["lowTree02"]);
+
+  scene.add(meshes["street00"]);
   scene.add(meshes["street01"]);
   scene.add(meshes["street02"]);
   scene.add(meshes["street03"]);
@@ -311,6 +413,33 @@ function loadCV() {
   scene.add(meshes["street08"]);
   scene.add(meshes["street09"]);
   scene.add(meshes["street10"]);
+  scene.add(meshes["street11"]);
+  scene.add(meshes["street12"]);
+  scene.add(meshes["street13"]);
+  scene.add(meshes["street14"]);
+  scene.add(meshes["street15"]);
+  scene.add(meshes["street16"]);
+  scene.add(meshes["street17"]);
+  scene.add(meshes["street18"]);
+  scene.add(meshes["street19"]);
+  scene.add(meshes["street20"]);
+  scene.add(meshes["street21"]);
+  scene.add(meshes["street22"]);
+  scene.add(meshes["street23"]);
+  scene.add(meshes["street24"]);
+  scene.add(meshes["street25"]);
+  scene.add(meshes["street26"]);
+  scene.add(meshes["street27"]);
+  scene.add(meshes["street28"]);
+  scene.add(meshes["street29"]);
+  scene.add(meshes["street30"]);
+  scene.add(meshes["street31"]);
+  scene.add(meshes["street32"]);
+  scene.add(meshes["street33"]);
+  scene.add(meshes["street34"]);
+  scene.add(meshes["street35"]);
+  scene.add(meshes["street36"]);
+
   scene.add(meshes["home"]);
   scene.add(meshes["fes"]);
   scene.add(meshes["char"]);
@@ -340,10 +469,10 @@ function loadCV() {
   scene.add(meshes["track03"]);
   scene.add(meshes["track04"]);
   scene.add(meshes["track05"]);
-  scene.add(meshes["track06"]);
-  scene.add(meshes["track07"]);
 
-  scene.add(meshes["mountain"]);
+  scene.add(meshes["tschool"]);
+  scene.add(meshes["afk"]);
+  scene.add(meshes["hfu"]);
 
   objectByName = meshes["char"];
   objectByName.visible = false;
@@ -351,6 +480,112 @@ function loadCV() {
 
   console.log(objectByName.position);
   showInformationForHolo();
+}
+
+function loadHobbys() {
+  scene.remove(meshes["lunar"]);
+  scene.remove(meshes["lunar_surface"]);
+
+  scene.remove(meshes["friTree01"]);
+  scene.remove(meshes["friTree02"]);
+  scene.remove(meshes["friTree03"]);
+  scene.remove(meshes["friTree04"]);
+  scene.remove(meshes["lowTree01"]);
+  scene.remove(meshes["lowTree02"]);
+
+  scene.remove(meshes["street00"]);
+  scene.remove(meshes["street01"]);
+  scene.remove(meshes["street02"]);
+  scene.remove(meshes["street03"]);
+  scene.remove(meshes["street04"]);
+  scene.remove(meshes["street05"]);
+  scene.remove(meshes["street06"]);
+  scene.remove(meshes["street07"]);
+  scene.remove(meshes["street08"]);
+  scene.remove(meshes["street09"]);
+  scene.remove(meshes["street10"]);
+  scene.remove(meshes["street11"]);
+  scene.remove(meshes["street12"]);
+  scene.remove(meshes["street13"]);
+  scene.remove(meshes["street14"]);
+  scene.remove(meshes["street15"]);
+  scene.remove(meshes["street16"]);
+  scene.remove(meshes["street17"]);
+  scene.remove(meshes["street18"]);
+  scene.remove(meshes["street19"]);
+  scene.remove(meshes["street20"]);
+  scene.remove(meshes["street21"]);
+  scene.remove(meshes["street22"]);
+  scene.remove(meshes["street23"]);
+  scene.remove(meshes["street24"]);
+  scene.remove(meshes["street25"]);
+  scene.remove(meshes["street26"]);
+  scene.remove(meshes["street27"]);
+  scene.remove(meshes["street28"]);
+  scene.remove(meshes["street29"]);
+  scene.remove(meshes["street30"]);
+  scene.remove(meshes["street31"]);
+  scene.remove(meshes["street32"]);
+  scene.remove(meshes["street33"]);
+  scene.remove(meshes["street34"]);
+  scene.remove(meshes["street35"]);
+  scene.remove(meshes["street36"]);
+
+  scene.remove(meshes["home"]);
+  scene.remove(meshes["fes"]);
+  scene.remove(meshes["char"]);
+  scene.remove(meshes["charHolo"]);
+  scene.remove(meshes["holopod00"]);
+
+  scene.remove(meshes["gras01"]);
+  scene.remove(meshes["gras02"]);
+  scene.remove(meshes["gras03"]);
+  scene.remove(meshes["gras04"]);
+  scene.remove(meshes["gras05"]);
+  scene.remove(meshes["gras06"]);
+
+  scene.remove(meshes["holopod01"]);
+  scene.remove(meshes["holopod02"]);
+  scene.remove(meshes["holopod03"]);
+  scene.remove(meshes["holopod04"]);
+  scene.remove(meshes["holopod05"]);
+  scene.remove(meshes["holopod06"]);
+  scene.remove(meshes["br294"]);
+  scene.remove(meshes["br185"]);
+  scene.remove(meshes["vehicle01"]);
+  scene.remove(meshes["vehicle02"]);
+  scene.remove(meshes["vehicle03"]);
+  scene.remove(meshes["track01"]);
+  scene.remove(meshes["track02"]);
+  scene.remove(meshes["track03"]);
+  scene.remove(meshes["track04"]);
+  scene.remove(meshes["track05"]);
+  scene.remove(meshes["track06"]);
+  scene.remove(meshes["track07"]);
+
+  scene.remove(meshes["tschool"]);
+  scene.remove(meshes["afk"]);
+  scene.remove(meshes["hfu"]);
+
+  meshes["dslr01"] = models.dslr.mesh.clone();
+  meshes["swimming"] = models.swimming.mesh.clone();
+  meshes["gaming"] = models.gaming.mesh.clone();
+
+  meshes["snowboard"] = models.snowboard.mesh.clone();
+
+  meshes["dslr01"].position.set(0, 0, -2);
+  meshes["dslr01"].scale.set(0.25, 0.25, 0.25);
+
+  meshes["gaming"].position.set(-2, 0, 0);
+  meshes["gaming"].scale.set(0.25, 0.25, 0.25);
+
+  meshes["snowboard"].position.set(-2, 0, -1);
+  // meshes["swimming"].rotation.y = -Math.PI/2;
+
+  scene.add(meshes["dslr01"]);
+  scene.add(meshes["swimming"]);
+  scene.add(meshes["gaming"]);
+  scene.add(meshes["snowboard"]);
 }
 
 // function onResourcesLoad() {
@@ -487,6 +722,7 @@ function loadCV() {
 export {
   objectLoad,
   loadCV,
+  loadHobbys,
   onResourcesLoad,
   RESOURCES_LOADED,
   objectByName,

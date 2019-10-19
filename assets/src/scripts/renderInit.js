@@ -203,6 +203,7 @@ function renderInit() {
           // TWEEN.update();
         }
         camera.lookAt(objectByName.position);
+        camera.updateMatrixWorld();
         spotLight.position.set(
           3 + objectByName.position.x,
           14,
@@ -224,10 +225,10 @@ function renderInit() {
         camera.lookAt(scene.position); // or the origin
         spotLight.position.set(3, 14, 12);
         spotLight.target.lookAt(camera);
+        camera.updateMatrixWorld();
 
         spotLight.target.updateMatrix();
         spotLight.target.updateMatrixWorld();
-        console.log(spotLight.position);
       }
       if (tweenUpdate == true) {
         TWEEN.update();

@@ -46,6 +46,7 @@ $("#cv").on("click", function() {
   closeNavigation();
   loadCV();
   cv = true;
+  hobby = false;
 });
 
 $("#hobby").on("click", function() {
@@ -54,6 +55,7 @@ $("#hobby").on("click", function() {
   closeNavigation();
   loadHobbys();
   hobby = true;
+  cv = false;
 });
 
 $("#portfolio").on("click", function() {

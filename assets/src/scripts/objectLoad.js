@@ -274,6 +274,43 @@ function loadCV() {
   meshes["gras35"] = models.gras.mesh.clone();
   meshes["gras36"] = models.gras.mesh.clone();
 
+  meshes["asGras00"] = models.gras.mesh.clone();
+  meshes["asGras01"] = models.gras.mesh.clone();
+  meshes["asGras02"] = models.gras.mesh.clone();
+  meshes["asGras03"] = models.gras.mesh.clone();
+  meshes["asGras04"] = models.gras.mesh.clone();
+  meshes["asGras05"] = models.gras.mesh.clone();
+  meshes["asGras06"] = models.gras.mesh.clone();
+  meshes["asGras07"] = models.gras.mesh.clone();
+  meshes["asGras08"] = models.gras.mesh.clone();
+  meshes["asGras09"] = models.gras.mesh.clone();
+
+  meshes["asphalt00"] = models.asphalt.mesh.clone();
+  meshes["asphalt01"] = models.asphalt.mesh.clone();
+  meshes["asphalt02"] = models.asphalt.mesh.clone();
+  meshes["asphalt03"] = models.asphalt.mesh.clone();
+  meshes["asphalt04"] = models.asphalt.mesh.clone();
+  meshes["asphalt05"] = models.asphalt.mesh.clone();
+  meshes["asphalt06"] = models.asphalt.mesh.clone();
+  meshes["asphalt07"] = models.asphalt.mesh.clone();
+  meshes["asphalt08"] = models.asphalt.mesh.clone();
+  meshes["asphalt09"] = models.asphalt.mesh.clone();
+  meshes["asphalt10"] = models.asphalt.mesh.clone();
+  meshes["asphalt11"] = models.asphalt.mesh.clone();
+  meshes["asphalt12"] = models.asphalt.mesh.clone();
+  meshes["asphalt13"] = models.asphalt.mesh.clone();
+  meshes["asphalt14"] = models.asphalt.mesh.clone();
+  meshes["asphalt15"] = models.asphalt.mesh.clone();
+  meshes["asphalt16"] = models.asphalt.mesh.clone();
+  meshes["asphalt17"] = models.asphalt.mesh.clone();
+  meshes["asphalt18"] = models.asphalt.mesh.clone();
+  meshes["asphalt19"] = models.asphalt.mesh.clone();
+  meshes["asphalt20"] = models.asphalt.mesh.clone();
+  meshes["asphalt21"] = models.asphalt.mesh.clone();
+  meshes["asphalt22"] = models.asphalt.mesh.clone();
+  meshes["asphalt23"] = models.asphalt.mesh.clone();
+  meshes["asphalt24"] = models.asphalt.mesh.clone();
+
   meshes["fes"] = models.fes.mesh.clone();
   meshes["br294"] = models.br294.mesh.clone();
   meshes["br185"] = models.br185.mesh.clone();
@@ -351,6 +388,43 @@ function loadCV() {
   meshes["street34"].position.set(62, 0.1, 0);
   meshes["street35"].position.set(64, 0.1, 0);
   meshes["street36"].position.set(66, 0.1, 0);
+
+  meshes["asphalt00"].position.set(-4, 0.1, -2);
+  meshes["asphalt01"].position.set(-2, 0.1, -2);
+  meshes["asphalt02"].position.set(4, 0.1, -2);
+  meshes["asphalt03"].position.set(6, 0.1, -2);
+  meshes["asphalt04"].position.set(8, 0.1, -2);
+  meshes["asphalt05"].position.set(10, 0.1, -2);
+  meshes["asphalt06"].position.set(12, 0.1, -2);
+  meshes["asphalt07"].position.set(14, 0.1, -2);
+
+  meshes["asGras00"].position.set(16, 0.1, -2);
+  meshes["asGras01"].position.set(18, 0.1, -2);
+  meshes["asGras02"].position.set(20, 0.1, -2);
+  meshes["asGras03"].position.set(22, 0.1, -2);
+  meshes["asGras04"].position.set(24, 0.1, -2);
+  meshes["asGras05"].position.set(26, 0.1, -2);
+  meshes["asGras06"].position.set(28, 0.1, -2);
+  meshes["asGras07"].position.set(30, 0.1, -2);
+  meshes["asGras08"].position.set(32, 0.1, -2);
+  meshes["asGras09"].position.set(34, 0.1, -2);
+
+  meshes["asphalt09"].position.set(36, 0.1, -2);
+  meshes["asphalt10"].position.set(38, 0.1, -2);
+  meshes["asphalt11"].position.set(40, 0.1, -2);
+  meshes["asphalt12"].position.set(42, 0.1, -2);
+  meshes["asphalt13"].position.set(44, 0.1, -2);
+  meshes["asphalt14"].position.set(46, 0.1, -2);
+  meshes["asphalt21"].position.set(48, 0.1, -2);
+  meshes["asphalt15"].position.set(50, 0.1, -2);
+  meshes["asphalt16"].position.set(52, 0.1, -2);
+  meshes["asphalt17"].position.set(54, 0.1, -2);
+  meshes["asphalt18"].position.set(56, 0.1, -2);
+  meshes["asphalt19"].position.set(58, 0.1, -2);
+  meshes["asphalt20"].position.set(60, 0.1, -2);
+  meshes["asphalt22"].position.set(62, 0.1, -2);
+  meshes["asphalt23"].position.set(64, 0.1, -2);
+  meshes["asphalt24"].position.set(66, 0.1, -2);
 
   meshes["gras01"].position.set(-4, 0.1, 2);
   meshes["gras02"].position.set(-2, 0.1, 2);
@@ -457,7 +531,7 @@ function loadCV() {
   meshes["tschool"].rotation.y = -Math.PI;
   meshes["afk"].position.set(50, 0.2, -3);
   meshes["afk"].rotation.y = -Math.PI / 2;
-  meshes["hfu"].position.set(60, 0.2, -3);
+  meshes["hfu"].position.set(60, 0.7, -3);
   meshes["hfu"].rotation.y = -Math.PI / 2;
   meshes["hfu"].scale.set(0.5, 0.5, 0.5);
 
@@ -505,6 +579,43 @@ function loadCV() {
   scene.add(meshes["street34"]);
   scene.add(meshes["street35"]);
   scene.add(meshes["street36"]);
+
+  scene.add(meshes["asphalt00"]);
+  scene.add(meshes["asphalt01"]);
+  scene.add(meshes["asphalt02"]);
+  scene.add(meshes["asphalt03"]);
+  scene.add(meshes["asphalt04"]);
+  scene.add(meshes["asphalt05"]);
+  scene.add(meshes["asphalt06"]);
+  scene.add(meshes["asphalt07"]);
+  scene.add(meshes["asphalt08"]);
+  scene.add(meshes["asphalt09"]);
+  scene.add(meshes["asphalt10"]);
+  scene.add(meshes["asphalt11"]);
+  scene.add(meshes["asphalt12"]);
+  scene.add(meshes["asphalt13"]);
+  scene.add(meshes["asphalt14"]);
+  scene.add(meshes["asphalt15"]);
+  scene.add(meshes["asphalt16"]);
+  scene.add(meshes["asphalt17"]);
+  scene.add(meshes["asphalt18"]);
+  scene.add(meshes["asphalt19"]);
+  scene.add(meshes["asphalt20"]);
+  scene.add(meshes["asphalt21"]);
+  scene.add(meshes["asphalt22"]);
+  scene.add(meshes["asphalt23"]);
+  scene.add(meshes["asphalt24"]);
+
+  scene.add(meshes["asGras00"]);
+  scene.add(meshes["asGras01"]);
+  scene.add(meshes["asGras02"]);
+  scene.add(meshes["asGras03"]);
+  scene.add(meshes["asGras04"]);
+  scene.add(meshes["asGras05"]);
+  scene.add(meshes["asGras06"]);
+  scene.add(meshes["asGras07"]);
+  scene.add(meshes["asGras08"]);
+  scene.add(meshes["asGras09"]);
 
   scene.add(meshes["home"]);
   scene.add(meshes["fes"]);

@@ -74,7 +74,8 @@ function renderInit() {
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0xc7e1ff);
+  // renderer.setClearColor(0xc7e1ff);
+  renderer.setClearColor(0x333333);
   document.body.appendChild(renderer.domElement);
 
   renderer.gammaOutput = true;
@@ -169,8 +170,8 @@ function renderInit() {
 
   //#region Controls
 
-  var controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.update();
+  // var controls = new THREE.OrbitControls(camera, renderer.domElement);
+  // controls.update();
 
   //# endregion
 

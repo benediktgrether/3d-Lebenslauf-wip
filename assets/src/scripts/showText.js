@@ -120,9 +120,13 @@ const getText = (target, message, index, interval) => {
         getText(target, message, index, interval);
       }, interval);
     } else if (checkNextMessage != undefined) {
+      // setTimeout(function() {
+      //   $(".card-arrow").show();
+      // }, 500);
       setTimeout(function() {
-        $(".card-arrow").show();
-      }, 500);
+        $(".card-text").empty();
+        showText(".card-text", i, j + 1, 0, 50);
+      }, 3000);
       // setTimeout(function () { $('.card-arrow').show() }, 500);
       // $('.card-arrow').addClass('card-arrow--bounce');
     } else {

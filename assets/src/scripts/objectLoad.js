@@ -924,6 +924,8 @@ function loadHobbys() {
   scene.remove(meshes["lunar"]);
   scene.remove(meshes["lunar_surface"]);
 
+  scene.remove(spotLight);
+
   scene.remove(meshes["friTree01"]);
   scene.remove(meshes["friTree02"]);
   scene.remove(meshes["friTree03"]);
@@ -1023,7 +1025,7 @@ function loadHobbys() {
 
     
   scene.remove(meshes["asphalt0202"]);
-  scene.remvoe(meshes["asphalt0212"]);
+  // scene.remvoe(meshes["asphalt0212"]);
 
   scene.remove(meshes["asphalt001"]);
   scene.remove(meshes["asphalt011"]);
@@ -1147,6 +1149,19 @@ function loadHobbys() {
   scene.remove(meshes["tschool"]);
   scene.remove(meshes["afk"]);
   scene.remove(meshes["hfu"]);
+
+  var spotLight = new THREE.SpotLight(0xffffff);
+  spotLight.position.set(3, 14, 12);
+  // spotLight.intensity = 5;
+  spotLight.castShadow = true;
+  // spotLight.shadow.radius = 4;
+
+  spotLight.shadowMapWidth = 2048;
+  spotLight.shadowMapHeight = 2048;
+  spotLight.shadowCameraNear = 1;
+  spotLight.shadowCameraFar = 4000;
+  spotLight.shadowCameraFov = 45;
+  scene.add(spotLight);
 
   meshes["dslr01"] = models.dslr.mesh.clone();
   meshes["swimming"] = models.swimming.mesh.clone();

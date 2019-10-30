@@ -1,6 +1,11 @@
 import { smoke, showInformation, objectByName } from "./renderInit";
 import { moveToNewLocation, moveToLocation } from "./tweenObject";
+import { showText, text } from "./showText";
 import { meshes } from "./objectLoad";
+
+import { i } from "./clickCard";
+
+let j = 0;
 
 var counter = 0;
 var startingHolo = false;
@@ -42,9 +47,17 @@ function hideHolo() {
   } else {
     // meshes["char"].visible = true;
     // setTimeout(function(){meshes["char"].visible = true}, 500);
+    // setTimeout(function() {
+    //   showInformation();
+    // }, 1000);
+
     setTimeout(function() {
-      showInformation();
-    }, 1000);
+      $(".card-wrapper, .card").show();
+    }, 200);
+    setTimeout(function() {
+      showText(".card-text", i, j, 0, 50);
+    }, 700);
+
     counter = 0;
     timing = 500;
   }

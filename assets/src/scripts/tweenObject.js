@@ -68,7 +68,7 @@ function lunarLandingAnimation() {
         $(".card-wrapper, .card").show("slow");
       }, 1000);
       setTimeout(function() {
-        showText(".card-text", 1, 0, 0, 80);
+        showText(".card-text", 1, 0, 0, 50);
       }, 2000);
     }
   });

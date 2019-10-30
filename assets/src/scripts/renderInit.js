@@ -185,7 +185,7 @@ function renderInit() {
 
     if (nav == false) {
       var delta = clock.getDelta();
-      charMovement(delta);
+      // charMovement(delta);
 
       renderer.render(scene, camera);
 
@@ -224,12 +224,13 @@ function renderInit() {
       if (hobby == true) {
         camera.position.set(20.8, 20, 20 - 0.8); // all components equal
         camera.lookAt(scene.position); // or the origin
-        spotLight.position.set(3, 14, 12);
-        spotLight.target.lookAt(camera);
         camera.updateMatrixWorld();
 
-        spotLight.target.updateMatrix();
-        spotLight.target.updateMatrixWorld();
+        // spotLight.position.set(3, 14, 12);
+        // spotLight.lookAt(camera);
+
+        // spotLight.updateMatrix();
+        // spotLight.updateMatrixWorld();
       }
       if (tweenUpdate == true) {
         TWEEN.update();
@@ -260,59 +261,6 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
-
-function charMovement(delta) {
-  playerVelocity.x -= playerVelocity.x * 10.0 * delta;
-  playerVelocity.z -= playerVelocity.z * 10.0 * delta;
-  playerVelocity.y -= playerVelocity.y * 10.0 * delta;
-
-  if (
-    keyboard[87] ||
-    keyboard[38] ||
-    keyboard[83] ||
-    keyboard[40] ||
-    keyboard[37] ||
-    keyboard[39]
-  ) {
-    if (keyboard[87] || keyboard[38]) {
-      playerVelocity.x += PLAYERSPEED * delta;
-      // console.log(objectByName.position);
-    }
-    if (keyboard[83] || keyboard[40]) {
-      playerVelocity.x -= PLAYERSPEED * delta;
-    }
-
-    if (keyboard[37]) {
-      objectByName.rotation.y += Math.PI * 0.01;
-    }
-    if (keyboard[39]) {
-      objectByName.rotation.y -= Math.PI * 0.01;
-    }
-    // console.log(camera.translateX)
-    objectByName.translateX(playerVelocity.x * delta);
-    objectByName.translateZ(playerVelocity.z * delta);
-
-    // #region Camera
-    camera.position.x = 20 + objectByName.position.x;
-    camera.position.z = 20 + objectByName.position.z;
-    camera.updateProjectionMatrix();
-  } else {
-    // Collision or no movement key being pressed. Stop movememnt
-    playerVelocity.x = 0;
-    playerVelocity.z = 0;
-  }
-}
-
-function keyDown(event) {
-  keyboard[event.keyCode] = true;
-}
-
-function keyUp(event) {
-  keyboard[event.keyCode] = false;
-}
-
-window.addEventListener("keydown", keyDown);
-window.addEventListener("keyup", keyUp);
 
 export {
   renderInit,
